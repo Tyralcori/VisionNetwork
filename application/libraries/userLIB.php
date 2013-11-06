@@ -1,7 +1,11 @@
 <?php
 
 /**
- * Userlib
+ * UserLib Class
+ * Handles user Login/Logout/Signup/ and many more
+ * @author Alexander Czichelski <a.czichelski@elitecoder.eu> | NO PRIVATE SUPPORT
+ * @version "soon"
+ * @todo Nothing to do here
  */
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');

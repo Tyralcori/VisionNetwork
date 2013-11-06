@@ -1,11 +1,17 @@
 <?php
 
-/**
- * Reflection Lib to stay alive
- */
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
+/**
+ * Serverreflection Class
+ * This is the "simple" launcher class.
+ * @author Alexander Czichelski <a.czichelski@elitecoder.eu> | NO PRIVATE SUPPORT
+ * @version "soon"
+ * @todo
+ * => GET Function
+ * ==> Server / Nodes from database
+ */
 class serverreflection {
 
     /**
@@ -32,6 +38,7 @@ class serverreflection {
      * pings all servers in the serverlist
      * @param type $servers
      * @return boolean
+     * @version PROGRESS!
      */
     /** IN PROGRESS FUNCTION
     public function ping($servers = null) {
