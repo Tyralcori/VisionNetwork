@@ -42,10 +42,10 @@ class userLIB {
             // Set session data
             foreach ($queryUser->result() as $key => $value) {
                 // Elements, we don't need in session
-                $denyList = array('password', );
+                $denyList = array('password',);
                 // Foreach Element in Object, add in session
-                foreach($value as $keyInner => $valueInner) {
-                    if(!in_array($keyInner, $denyList)) {
+                foreach ($value as $keyInner => $valueInner) {
+                    if (!in_array($keyInner, $denyList)) {
                         $userData[$keyInner] = $valueInner;
                     }
                 }
@@ -64,7 +64,7 @@ class userLIB {
     }
 
     /**
-     * 
+     * This function creates accounts
      */
     public function newAccount() {
         // Set post
@@ -151,6 +151,79 @@ class userLIB {
      */
     public function logout() {
         $this->ci->session->sess_destroy();
+    }
+
+    /**
+     * Unban user
+     * @param type $userIDByParam
+     * @return type
+     */
+    public function unban($userIDByParam = null) {
+        // UserID
+        $userID = 0;
+        // Is userID Param empty?
+        if (empty($userIDByParam)) {
+            // Is userID Session empty?
+            $userIDBySession = $this->ci->session->userdata('id') ? $this->ci->session->userdata('id') : 0;
+            if (empty($userIDBySession)) {
+                return;
+            } else {
+                $userID = $userIDBySession;
+            }
+        } else {
+            $userID = $userIDByParam;
+        }
+
+        // We have a valid UserID. Now, check if banned
+        $banned = $this->ci->session->userdata('banned') ? $this->ci->session->userdata('banned') : 0;
+        // If not empty, user (currently) is banned
+        if (!empty($banned) && !empty($userID)) {
+            // Select bannedUntil by db (not session value)
+            $bannedUntil = $this->ci->db->query("SELECT `bannedUntil` FROM login WHERE id = {$userID}")->row()->bannedUntil;
+            //If bannedUntil is empty, i have some bad news.. (PERMANENTLY BANNED)
+            if (!empty($bannedUntil) || $bannedUntil == '0000-00-00 00:00:00') {
+                $objDateTime = new DateTime('NOW');
+                $timeNow = $objDateTime->format('Y-m-d H:i:s');
+                // Banned time expired, unban user
+                if ($bannedUntil <= $timeNow) {
+                    // Clear ban properties and destroy session for clear login
+                    $unbanQuery = $this->ci->db->query("UPDATE login SET banned = 0, bannedUntil = '', bannedReason = '' WHERE id = {$userID}");
+                    $this->ci->session->sess_destroy();
+                }
+            }
+        }
+        return;
+    }
+    
+    /**
+     * Ban function - bans user..?!
+     * @param type $userID
+     * @return type
+     */
+    public function ban($userID, $bannedUntil = null, $bannedReason = null) {
+        // userID must be given
+        if(empty($userID)) {
+            return;
+        }
+        // Ban user - banned bool
+        $banUserQuery = $this->ci->db->query("UPDATE login SET banned = 1 WHERE id = {$userID}"); 
+        
+        // If not empty banned until, ban until
+        if(!empty($bannedUntil)) {
+            // If you won't enter datetime, you can enter "now", or just give an 1 to make datetime now
+            $possibleNow = array('now', 1, );
+            if(in_array($bannedUntil, $possibleNow)) {
+                $objDateTime = new DateTime('NOW');
+                $bannedUntil = $objDateTime->format('Y-m-d H:i:s');
+            }
+            $banUserQueryUntil = $this->ci->db->query("UPDATE login SET bannedUntil = '{$bannedUntil}' WHERE id = {$userID}"); 
+        }
+        
+        // If not empty reason, set reason
+        if(!empty($bannedReason)) {
+            $banUserQueryReason = $this->ci->db->query("UPDATE login SET bannedReason = '{$bannedReason}' WHERE id = {$userID}"); 
+        }
+        return;
     }
 
 }

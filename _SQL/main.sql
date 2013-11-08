@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS login (
 `banned` int(1) NOT NULL DEFAULT 0,
 `bannedUnitl` datetime,
 `bannedReason` varchar(500),
+`banCounter` int(5),
 PRIMARY KEY(id)
 );
 
