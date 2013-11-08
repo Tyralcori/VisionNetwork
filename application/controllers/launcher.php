@@ -118,7 +118,7 @@ class launcher extends CI_Controller {
         if($options['subpage'] != $subpage) {
             $subexecuter = $subpage;
         }
-        
+
         // Load and execute libs | functions
         if(!empty($executer) && file_exists(APPPATH . 'libraries/' . $executer . '.php')) {
             require_once APPPATH. 'libraries/' . $executer . '.php';
