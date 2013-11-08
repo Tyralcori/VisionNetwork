@@ -64,21 +64,21 @@ class channelLIB {
 
         // Get minimum join level
         $limitJoinLevelByChannel = $this->getJoinLevel($getChannelIDQuery);
-
+        
+        // Select Permission
+        $permission = $this->getPermission($getChannelIDQuery, $userID);
+        
         // Joining normal channel
         if ($limitJoinLevelByChannel == 1) {
             // If $limitConnectionsByChannel not -1 (unlimited) proof max allowed connections
             if ($limitConnectionsByChannel != -1) {
-                // Is Channel full?
-                if ($limitConnectionsByChannel < ($currentConnectionsByChannelID + 1)) {
+                // Is Channel full? | Master (Permission = 99) can always join
+                if ($limitConnectionsByChannel < ($currentConnectionsByChannelID + 1) && $permission != 99) {
                     // Channel is full!
                     die("FULL");
                 }
             }
         }
-
-        // Select Permission
-        $permission = $this->getPermission($getChannelIDQuery, $userID);
         
         // Insert connection
         $createConnection = $this->setConnection($getChannelIDQuery, $userID);
