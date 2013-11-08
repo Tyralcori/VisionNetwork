@@ -40,12 +40,15 @@ class userLIB {
             // User found, update lastlogin
             $queryUpdate = $this->ci->db->query("UPDATE login SET lastlogin = NOW() WHERE password = '{$post['pass']}' AND (email LIKE '{$post['user']}' OR username LIKE '{$post['user']}')");
             // Set session data
-            foreach ($queryUser->result() as $query) {
-                $userData = array(
-                    'email' => $query->email, 'user' => $query->username, 
-                    'firstLogin' => $query->firstLogin, 'lastLogin' => $query->lastLogin, 
-                    'banned' => $query->banned, 'bannedUntil' => $query->bannedUntil, 'bannedReason' => $query>bannedReason,
-                );
+            foreach ($queryUser->result() as $key => $value) {
+                // Elements, we don't need in session
+                $denyList = array('password', );
+                // Foreach Element in Object, add in session
+                foreach($value as $keyInner => $valueInner) {
+                    if(!in_array($keyInner, $denyList)) {
+                        $userData[$keyInner] = $valueInner;
+                    }
+                }
             }
             // Write session data
             $this->ci->session->set_userdata($userData);
