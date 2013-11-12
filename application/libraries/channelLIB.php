@@ -284,7 +284,7 @@ class channelLIB {
         // Channel does'nt exists, create
         $createChannel = $this->ci->db->query("INSERT INTO `channels` (name) VALUES ('{$name}')");
 
-        $getChannelIDQueryTwice = $this->ci->db->query("SELECT `id` FROM channels WHERE name LIKE {$name}")->row()->id;
+        $getChannelIDQueryTwice = $this->ci->db->query("SELECT `id` FROM channels WHERE name LIKE '{$name}'")->row()->id;
         if (empty($getChannelIDQueryTwice)) {
             // Could'nt insert channel.. some error handle here
         }
