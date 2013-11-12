@@ -50,11 +50,12 @@ class channelLIB {
             // Will later need this
             $getChannelIDQuery = $this->create($channelName, $userID);
         }
-        
+
         // Check already connected
         $connected = $this->checkConnection($getChannelIDQuery, $userID);
-        if($connected) {
-            die("YOU ARE CONNECTED");
+        if ($connected) {
+            $channelInfos = $this->getChannelInformations($getChannelIDQuery);
+            return $channelInfos;
         }
 
         // Get maximum connections
@@ -64,10 +65,10 @@ class channelLIB {
 
         // Get minimum join level
         $limitJoinLevelByChannel = $this->getJoinLevel($getChannelIDQuery);
-        
+
         // Select Permission
         $permission = $this->getPermission($getChannelIDQuery, $userID);
-        
+
         // Joining normal channel
         if ($limitJoinLevelByChannel == 1) {
             // If $limitConnectionsByChannel not -1 (unlimited) proof max allowed connections
@@ -75,13 +76,15 @@ class channelLIB {
                 // Is Channel full? | Master (Permission = 99) can always join
                 if ($limitConnectionsByChannel < ($currentConnectionsByChannelID + 1) && $permission != 99) {
                     // Channel is full!
-                    die("FULL");
+                    return array('state' => 'FULL');
                 }
             }
         }
-        
+
         // Insert connection
         $createConnection = $this->setConnection($getChannelIDQuery, $userID);
+        $channelInfos = $this->getChannelInformations($getChannelIDQuery);
+        return $channelInfos;
     }
 
     /**
@@ -100,7 +103,33 @@ class channelLIB {
         // Return current connected user
         return $currentConnectionsByChannelID;
     }
-    
+
+    /**
+     * Get all Nicks in Channel
+     * @param type $channelID
+     * @return type
+     */
+    public function getNickList($channelID = null) {
+        // If empty channelID, return
+        if (empty($channelID)) {
+            return;
+        }
+
+        // Query all users in channel
+        $nickListQuery = $this->ci->db->query("SELECT DISTINCT login.username FROM connections, login WHERE connections.userID = login.id AND connections.channelID = {$channelID}");
+
+        // Nick List container
+        $nickList = array();
+        
+        // Fill Container
+        foreach ($nickListQuery->result() as $key => $value) {
+            $nickList[] = $value->username;
+        }
+        
+        // Return filled container
+        return $nickList;
+    }
+
     /**
      * Get Permission for channel by user
      * @param type $channelID
@@ -109,7 +138,7 @@ class channelLIB {
      */
     public function getPermission($channelID = null, $userID = null) {
         // If empty channelID || $userID return
-        if(empty($channelID) || empty($userID)) {
+        if (empty($channelID) || empty($userID)) {
             return;
         }
         // Select Permission
@@ -121,7 +150,7 @@ class channelLIB {
         }
         return $selectPermission;
     }
-    
+
     /**
      * Sets permission for a user in a channel
      * @param type $channelID
@@ -131,11 +160,11 @@ class channelLIB {
      */
     public function setPermission($channelID = null, $userID = null, $permission = null) {
         // If empty channelID || $userID return
-        if(empty($channelID) || empty($userID)) {
+        if (empty($channelID) || empty($userID)) {
             return;
         }
         // Default permission
-        if(empty($permission)) {
+        if (empty($permission)) {
             $permission = 1;
         }
         $insertPermissionQuery = $this->ci->db->query("INSERT INTO `permissions` (userID, channelID, permissionLevel) VALUES ({$userID},{$channelID},{$permission})");
@@ -173,7 +202,7 @@ class channelLIB {
         // Return join level
         return $limitJoinLevelByChannel;
     }
-    
+
     /**
      * Returns write level 
      * @param type $channelID
@@ -238,7 +267,7 @@ class channelLIB {
      */
     public function checkConnection($channelID = null, $userID = null) {
         // If empty channelID || empty userID
-        if(empty($channelID) || empty($userID)) {
+        if (empty($channelID) || empty($userID)) {
             return;
         }
         // Check already connected
@@ -248,7 +277,43 @@ class channelLIB {
         }
         return false;
     }
-    
+
+    /**
+     * Kill connection
+     * @param type $channelID
+     * @param type $userID
+     * @return boolean
+     */
+    public function killConnection($channelID = null, $userID = null) {
+        // If empty channelID || empty userID
+        if (empty($channelID) || empty($userID)) {
+            return;
+        }
+        // Kill connection
+        $killedConnection = $this->ci->db->query("DELETE FROM connections WHERE userID = {$userID} AND channelID = {$channelID}");
+        return true;
+    }
+
+    /**
+     * Get topic by channelID
+     * @param type $channelID
+     * @return string
+     */
+    public function getTopic($channelID = null) {
+        // If empty channelID, return
+        if (empty($channelID)) {
+            return;
+        }
+
+        // Get Topic
+        $getTopic = $this->ci->db->query("SELECT `topic` FROM channels WHERE id LIKE {$channelID}")->row()->topic;
+        // Set default Topic, if there is no result
+        if (empty($getTopic)) {
+            $getTopic = "No Topic";
+        }
+        return $getTopic;
+    }
+
     /**
      * Set connection for a user in a channel
      * @param type $channelID
@@ -257,12 +322,70 @@ class channelLIB {
      */
     public function setConnection($channelID = null, $userID = null) {
         // If empty channelID || empty userID
-        if(empty($channelID) || empty($userID)) {
+        if (empty($channelID) || empty($userID)) {
             return;
         }
         // Insert connection
         $this->ci->db->query("INSERT INTO `connections` (userID, channelID, lastActivity) VALUES ({$userID}, {$channelID}, NOW())");
         return true;
+    }
+
+    /**
+     * Returns log by channel 
+     * @param type $channelID
+     * @param int $limit
+     * @return type
+     */
+    public function getLog($channelID = null, $limit = null) {
+        // If empty channelID, return
+        if (empty($channelID)) {
+            return;
+        }
+
+        // Default Limit
+        if (empty($limit)) {
+            $limit = 100;
+        }
+
+        // Get messgaes
+        $messageQuery = $this->ci->db->query("SELECT messages.*, login.username AS username FROM messages, login WHERE channelID LIKE '{$channelID}' AND messages.userID = login.id ORDER BY timestamp DESC LIMIT {$limit}");
+
+        // Message Container
+        $messageContainer = array();
+
+        // Add some nice messages!
+        foreach ($messageQuery->result() as $key => $value) {
+            // Foreach Element in Object, add in session
+            foreach ($value as $keyInner => $valueInner) {
+                $messageContainer[$key][$keyInner] = $valueInner;
+            }
+        }
+
+        // Return Log
+        return $messageContainer;
+    }
+
+    /**
+     * Return most important infos about the channel
+     * @param type $channelID
+     * @return type
+     */
+    public function getChannelInformations($channelID = null) {
+        // If empty channelID, return
+        if (empty($channelID)) {
+            return;
+        }
+
+        // Get nicklist (current connected User in channel)
+        $nickList = $this->getNickList($channelID);
+
+        // Get current setted Topic from channel
+        $topic = $this->getTopic($channelID);
+
+        // Get last 100 Messages
+        $contentLog = $this->getLog($channelID, 100);
+
+        return array('nicks' => $nickList, 'topic' => $topic, 'log' => $contentLog, 'state' => 'CONNECTED');
     }
 
 }

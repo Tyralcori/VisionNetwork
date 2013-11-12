@@ -1,5 +1,5 @@
 <div class="channelChooser">
-    <form class="form-horizontal form-channel" action="#" method="POST" role="form">
+    <form class="form-horizontal form-channel" action="/channel/join" method="POST" role="form">
         <label>Enter a channel</label>
         <div class="form-group">
             <div class="col-sm-10">

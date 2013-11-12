@@ -116,3 +116,49 @@
     padding: 15px;
 }
 /* CHANNEL CHOOSER */
+
+/* CHANNEL CLIENT */
+.client {
+    position:absolute;
+    top:0px;
+    left:0px;
+    height:100%;
+    width:100%;
+}
+
+.topic {
+    position:absolute;
+    top:0px;
+    left:0px;
+    height:5%;
+    min-height:25px;
+    width:100%;
+    background-color:#d3d3d3;   
+    text-align:center;
+}
+
+.bottomChannel {
+    position:absolute;
+    top:25px;
+    left:0px;
+    height:95%;
+    width:100%;
+}
+
+.nickList {
+    position:absolute;
+    float:left;
+    top:5px;
+    left:80%;
+    width:20%;
+    height:99%;
+}
+
+.contentChat {
+    position:absolute;
+    top:5px;
+    left:0px;
+    width:80%;
+    height:99%;
+}
+/* CHANNEL CLIENT */

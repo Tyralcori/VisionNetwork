@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-11-08 10:47:10
+<?php /* Smarty version Smarty-3.1.13, created on 2013-11-12 12:04:18
          compiled from "application/views/ELEMENTS/overview.php" */ ?>
 <?php /*%%SmartyHeaderCode:623597636527a08babc49b7-23400027%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '0112d89c8e740822edb779cb5dd42e84bbc9e2f2' => 
     array (
       0 => 'application/views/ELEMENTS/overview.php',
-      1 => 1383898539,
+      1 => 1384254257,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_527a08bac0cdd2_13599870')) {function content_527a08bac0cdd2_13599870($_smarty_tpl) {?><div class="channelChooser">
-    <form class="form-horizontal form-channel" action="#" method="POST" role="form">
+    <form class="form-horizontal form-channel" action="/channel/join" method="POST" role="form">
         <label>Enter a channel</label>
         <div class="form-group">
             <div class="col-sm-10">

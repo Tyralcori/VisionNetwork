@@ -57,10 +57,11 @@ class messageLIB {
      * @param type $channel
      * @return type
      */
-    public function recive($channel = null, $reverse = null) {
+    public function recive($channel = null, $json = null, $reverse = null) {
         // If empty channel, return
         if (empty($channel)) {
-            return;
+            $channel = "default";
+            //return;
         }
 
         // Get channelID
@@ -86,6 +87,11 @@ class messageLIB {
         // If not empty reverse, reverse array (latest message at last)
         if(!empty($reverse)) {
             $messageContainer = array_reverse($messageContainer);
+        }
+        
+        // Return all the messages in json?
+        if(!empty($json)) {
+            return json_encode($messageContainer);
         }
         
         // Return all the messages
