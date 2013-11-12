@@ -173,6 +173,22 @@ class channelLIB {
         // Return join level
         return $limitJoinLevelByChannel;
     }
+    
+    /**
+     * Returns write level 
+     * @param type $channelID
+     * @return type
+     */
+    public function getWriteLevel($channelID = null) {
+        // If empty channelID, return
+        if (empty($channelID)) {
+            return;
+        }
+        // Get minimum join level for user
+        $limitWriteLevelByChannel = $this->ci->db->query("SELECT `writelevel` FROM channels WHERE id LIKE {$channelID}")->row()->writelevel;
+        // Return join level
+        return $limitWriteLevelByChannel;
+    }
 
     /**
      * Returns channel id

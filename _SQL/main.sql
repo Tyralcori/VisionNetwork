@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS channels (
 `topic` varchar(255),
 `slots` int(10) DEFAULT 50,
 `joinlevel` int(10) DEFAULT 0,
+`writelevel` int(10) DEFAULT 0,
 PRIMARY KEY(`id`)
 );
 
@@ -43,5 +44,15 @@ CREATE TABLE IF NOT EXISTS permissions (
 `userID` int(5) NOT NULL,
 `channelID` int(10) NOT NULL,
 `permissionLevel` int(5) DEFAULT 1,
+PRIMARY KEY(`id`)
+);
+
+-- MESSAGE TABLE 2013/11/12
+CREATE TABLE IF NOT EXISTS messages (
+`id` int(10) AUTO_INCREMENT,
+`userID` int(5) NOT NULL,
+`channelID` int(10) NOT NULL,
+`message` varchar(500) NOT NULL,
+`timestamp` datetime,
 PRIMARY KEY(`id`)
 );
