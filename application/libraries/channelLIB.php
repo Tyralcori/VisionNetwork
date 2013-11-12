@@ -22,6 +22,15 @@ class channelLIB {
     }
 
     /**
+     * Return complete channels
+     * @return type
+     */
+    public function index() {
+        // Index action 
+        return $this->getChannelAll();
+    }
+    
+    /**
      * Function to join|create channel
      * @param type $channelName
      * @param type $userID
@@ -84,6 +93,15 @@ class channelLIB {
         // Insert connection
         $createConnection = $this->setConnection($getChannelIDQuery, $userID);
         $channelInfos = $this->getChannelInformations($getChannelIDQuery);
+
+        // Add channel in session
+        $currentChannels = $this->ci->session->userdata('currentChannels');
+        $currentChannels[] = $channelName;
+
+        // Set channels
+        $this->ci->session->set_userdata(array('currentChannels' => $currentChannels));
+
+        // Return Channelinfos
         return $channelInfos;
     }
 
@@ -120,12 +138,12 @@ class channelLIB {
 
         // Nick List container
         $nickList = array();
-        
+
         // Fill Container
         foreach ($nickListQuery->result() as $key => $value) {
             $nickList[] = $value->username;
         }
-        
+
         // Return filled container
         return $nickList;
     }
@@ -230,11 +248,28 @@ class channelLIB {
             return;
         }
         // Get channel id by name
-        $channelName = $this->ci->db->query("SELECT `id` FROM channels WHERE name LIKE '{$name}'")->row()->id;
+        $channelID = $this->ci->db->query("SELECT `id` FROM channels WHERE name LIKE '{$name}'")->row()->id;
         // reutrns id
+        return $channelID;
+    }
+    
+    /**
+     * Returns channel name
+     * @param type $id
+     * @return type
+     */
+
+    public function getChannelNameByID($id = null) {
+         // If empty name, return
+        if (empty($id)) {
+            return;
+        }
+        // Get channel id by name
+        $channelName = $this->ci->db->query("SELECT `name` FROM channels WHERE id = {$id}")->row()->name;
+        // reutrns name
         return $channelName;
     }
-
+    
     /**
      * Creates channel
      * @param type $name
@@ -384,8 +419,55 @@ class channelLIB {
 
         // Get last 100 Messages
         $contentLog = $this->getLog($channelID, 100);
+        
+        $channelName = $this->getChannelNameByID($channelID);
 
-        return array('nicks' => $nickList, 'topic' => $topic, 'log' => $contentLog, 'state' => 'CONNECTED');
+        // Return all infos
+        return array('id' => $channelID, 'name' => $channelName, 'nicks' => $nickList, 'topic' => $topic, 'log' => $contentLog, 'state' => 'CONNECTED');
+    }
+    
+    /**
+     * Get all channel logs
+     * @param type $userID
+     * @return type
+     */
+    public function getChannelAll($userID = null) {
+        // Get userID
+        if (empty($userID)) {
+            $userID = $this->ci->session->userdata('id') ? $this->ci->session->userdata('id') : 0;
+            if (empty($userID)) {
+                return;
+            }
+        }
+        
+        // Get all connections
+        $selectAllChannels = $this->ci->db->query("SELECT DISTINCT `channelID` FROM connections WHERE userID = {$userID}");
+        
+        // Connected Channels Container
+        $connectedChannels = array();
+        
+        // Fill container with all connections
+        foreach ($selectAllChannels->result() as $key => $value) {
+            $connectedChannels[] = $value->channelID;
+        }
+        
+        // Channel Information Container
+        $channelInfos = array();
+        
+        // Channel Container
+        $channelIDS = array();
+                
+        // Fill channel info container
+        foreach($connectedChannels as $channelKey => $connectedChannel) {
+            // Single ADD
+            $channelInfos[] = $this->getChannelInformations($connectedChannel);
+        }
+
+        // Set all Channel IDS with Name into Session!
+        $this->ci->session->set_userdata('currentChannels', $channelInfos);
+        
+        // Return all the infos
+        return $channelInfos;
     }
 
 }
