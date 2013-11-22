@@ -75,6 +75,20 @@ class launcher extends CI_Controller {
         $session = $this->session->all_userdata();
         
         $options['userSession'] = $session ? $session : '';
+        
+        if(!empty($options['userSession']['id'])) {
+            // Get channels
+            if(file_exists(APPPATH . 'libraries/channelLIB.php')) {
+                require_once APPPATH. 'libraries/channelLIB.php';
+                // Check, if user is connected to some channels
+                $channelLib = new channelLIB();
+                $return = $channelLib->getChannelAll($options['userSession']['id']);
+                if(!empty($return) && is_array($return) && ($page == 'user' || empty($page)) && $subpage != 'logout') {
+                    // We have some channels, so show them                
+                    $page = 'channel';
+                }
+            }        
+        }
         // ====================== SET SESSION ====================== //
         
         

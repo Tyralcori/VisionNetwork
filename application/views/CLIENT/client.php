@@ -7,7 +7,7 @@
                 <a href="#{$item.name}" data-toggle="tab">{$item.name}</a>
             </li>
             {assign var=zaehler value=$zaehler+1}
-            {/foreach}
+            {/foreach}            
         </ul>
     </div>
     <div class="bodyChat">
@@ -20,19 +20,21 @@
                         {foreach name=name item=nickname from=$item.nicks}
                         <label>{$nickname}</label><br/>
                         {/foreach}
+                        <br/><br/>
+                        <a href="/user/logout/" class="clientLogout">LOGOUT</a>
                     </div>
 
                     <div class="contentChat">
                         {foreach name=name item=logLine from=$item.log}
                         [{$logLine.timestamp}] {$logLine.username}: {$logLine.message}<br/>
-                        {/foreach}
-                        <div class="input">
-                            <input type="message" class="form-control" id="message" placeholder="Message..">
-                        </div>
+                        {/foreach}                        
                     </div>
                 </div>
             </div>
             {/foreach}
+            <div class="input">
+                <input type="message" class="form-control message" id="message" placeholder="Message..">
+            </div>
         </div>
     </div>
 </div>

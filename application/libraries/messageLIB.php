@@ -25,15 +25,21 @@ class messageLIB {
      * @param type $message
      * @return type
      */
-    public function publish($channel = null, $message = null, $userID = null) {
-        // Make input sql friendly
-        $message = html_entity_decode($message);
-
+    public function publish($channel = null, $message = null, $userID = null) {   
         // If empty channel or message, return
         if (empty($channel) || empty($message)) {
-            return;
+            if(!empty($_POST) && !empty($_POST['message']) && !empty($_POST['channel'])) {
+                $channel = $_POST['channel'];
+                $message = $_POST['message'];
+            } else {
+                return;
+            }
         }
 
+        // Make input sql friendly
+        $channel = html_entity_decode($channel);
+        $message = html_entity_decode($message);
+        
         // Get userID
         if (empty($userID)) {
             $userID = $this->ci->session->userdata('id') ? $this->ci->session->userdata('id') : 0;

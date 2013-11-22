@@ -3,13 +3,14 @@
         <label>Enter a channel</label>
         <div class="form-group">
             <div class="col-sm-10">
-                <input type="channel" class="form-control" id="channelID" placeholder="frostjoke">
+                <input type="channel" name="channel" class="form-control" id="channelID" placeholder="frostjoke">
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default">Join</button>
+                <button type="submit" name="join" class="btn btn-default">Join</button>
+                <button type="button" class="btn btn-default" onClick="document.location.reload(true)">Channel overview</button>
             </div>
-        </div>
+        </div>        
     </form>
 </div>

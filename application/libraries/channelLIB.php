@@ -29,7 +29,7 @@ class channelLIB {
         // Index action 
         return $this->getChannelAll();
     }
-    
+
     /**
      * Function to join|create channel
      * @param type $channelName
@@ -41,6 +41,11 @@ class channelLIB {
         if (empty($channelName)) {
             // Default Channel! (Yes, default. Change it)
             $channelName = 'default';
+
+            // Overwrite default
+            if (!empty($_POST) && !empty($_POST['channel'])) {
+                $channelName = html_entity_decode($_POST['channel']);
+            }
         }
         // Make input sql friendly
         $channelName = html_entity_decode($channelName);
@@ -55,9 +60,30 @@ class channelLIB {
 
         // Get channel ID
         $getChannelIDQuery = $this->getChannelIDByName($channelName);
+
         if (empty($getChannelIDQuery)) {
             // Will later need this
             $getChannelIDQuery = $this->create($channelName, $userID);
+
+            // Insert connection
+            $createConnection = $this->setConnection($getChannelIDQuery, $userID);
+
+            // Add in session!
+            $channelInfosPrivate = $this->getChannelInformations($getChannelIDQuery);
+
+            // Add channel in session
+            $currentChannels = $this->ci->session->userdata('currentChannels');
+            $currentChannels[] = $channelInfosPrivate;
+
+            // Set channels
+            $this->ci->session->set_userdata(array('currentChannels' => $currentChannels));
+
+            // Load helper for redirect
+            $this->ci->load->helper('url');
+            redirect('/', 'refresh'); // Attention, HTTPS LAYER!            
+        } else {
+            // Insert connection
+            $createConnection = $this->setConnection($getChannelIDQuery, $userID);
         }
 
         // Check already connected
@@ -90,13 +116,11 @@ class channelLIB {
             }
         }
 
-        // Insert connection
-        $createConnection = $this->setConnection($getChannelIDQuery, $userID);
         $channelInfos = $this->getChannelInformations($getChannelIDQuery);
 
         // Add channel in session
         $currentChannels = $this->ci->session->userdata('currentChannels');
-        $currentChannels[] = $channelName;
+        $currentChannels[] = $channelInfos;
 
         // Set channels
         $this->ci->session->set_userdata(array('currentChannels' => $currentChannels));
@@ -248,19 +272,27 @@ class channelLIB {
             return;
         }
         // Get channel id by name
-        $channelID = $this->ci->db->query("SELECT `id` FROM channels WHERE name LIKE '{$name}'")->row()->id;
-        // reutrns id
+        try {
+            $testChannelExisting = $this->ci->db->query("SELECT `id` FROM channels WHERE name LIKE '{$name}'");
+            if ($testChannelExisting->num_rows() > 0) {
+                $channelID = $this->ci->db->query("SELECT `id` FROM channels WHERE name LIKE '{$name}'")->row()->id;
+            } else {
+                return false;
+            }
+        } catch (Exception $e) {
+            
+        }
+        // returns id
         return $channelID;
     }
-    
+
     /**
      * Returns channel name
      * @param type $id
      * @return type
      */
-
     public function getChannelNameByID($id = null) {
-         // If empty name, return
+        // If empty name, return
         if (empty($id)) {
             return;
         }
@@ -269,7 +301,7 @@ class channelLIB {
         // reutrns name
         return $channelName;
     }
-    
+
     /**
      * Creates channel
      * @param type $name
@@ -419,13 +451,13 @@ class channelLIB {
 
         // Get last 100 Messages
         $contentLog = $this->getLog($channelID, 100);
-        
+
         $channelName = $this->getChannelNameByID($channelID);
 
         // Return all infos
         return array('id' => $channelID, 'name' => $channelName, 'nicks' => $nickList, 'topic' => $topic, 'log' => $contentLog, 'state' => 'CONNECTED');
     }
-    
+
     /**
      * Get all channel logs
      * @param type $userID
@@ -439,33 +471,33 @@ class channelLIB {
                 return;
             }
         }
-        
+
         // Get all connections
         $selectAllChannels = $this->ci->db->query("SELECT DISTINCT `channelID` FROM connections WHERE userID = {$userID}");
-        
+
         // Connected Channels Container
         $connectedChannels = array();
-        
+
         // Fill container with all connections
         foreach ($selectAllChannels->result() as $key => $value) {
             $connectedChannels[] = $value->channelID;
         }
-        
+
         // Channel Information Container
         $channelInfos = array();
-        
+
         // Channel Container
         $channelIDS = array();
-                
+
         // Fill channel info container
-        foreach($connectedChannels as $channelKey => $connectedChannel) {
+        foreach ($connectedChannels as $channelKey => $connectedChannel) {
             // Single ADD
             $channelInfos[] = $this->getChannelInformations($connectedChannel);
         }
 
         // Set all Channel IDS with Name into Session!
         $this->ci->session->set_userdata('currentChannels', $channelInfos);
-        
+
         // Return all the infos
         return $channelInfos;
     }
