@@ -77,7 +77,7 @@ class messageLIB {
         }
 
         // Get messgaes
-        $messageQuery = $this->ci->db->query("SELECT * FROM messages WHERE channelID LIKE '{$channelID}' ORDER BY timestamp DESC");
+        $messageQuery = $this->ci->db->query("SELECT * FROM messages WHERE channelID LIKE '{$channelID}' ORDER BY timestamp ASC");
 
         // Message Container
         $messageContainer = array();
