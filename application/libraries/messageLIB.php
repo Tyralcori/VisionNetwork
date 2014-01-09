@@ -65,7 +65,6 @@ class messageLIB {
      */
     public function recive($channel = null, $json = null, $reverse = null) {
         // If empty channel, return
-        // flushAllChannels
         if (empty($channel)) {
             // Dirty hack, i know..
             $serverTempName = (int) str_replace('/message/recive/', '', $_SERVER['REQUEST_URI']);
@@ -138,7 +137,6 @@ class messageLIB {
         // Return all the messages in json?
         if (!empty($json)) {
             echo json_encode($messageContainer);
-            die();
         }
 
         // Return all the messages
