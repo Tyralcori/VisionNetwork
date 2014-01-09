@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-11-08 09:17:56
+<?php /* Smarty version Smarty-3.1.13, created on 2014-01-03 13:54:56
          compiled from "application/views/ELEMENTS/login.php" */ ?>
 <?php /*%%SmartyHeaderCode:19327174665279fb4772f771-19833407%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '685ee1a3aa344c396fca069b2f05466d7e6bbe34' => 
     array (
       0 => 'application/views/ELEMENTS/login.php',
-      1 => 1383898526,
+      1 => 1388753695,
       2 => 'file',
     ),
   ),
@@ -24,27 +24,31 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5279fb477c8956_97811174')) {function content_5279fb477c8956_97811174($_smarty_tpl) {?><div class="container">
-    <div class="loginMask">
-        <h1 class="text-center login-title">Sign in to continue to <?php echo $_smarty_tpl->tpl_vars['title']->value;?>
+<?php if ($_valid && !is_callable('content_5279fb477c8956_97811174')) {function content_5279fb477c8956_97811174($_smarty_tpl) {?><div id="login">
+    <div class="container">
+        <div class="loginMask">
+            <h1 class="text-center login-title">Sign in to continue to <?php echo $_smarty_tpl->tpl_vars['title']->value;?>
 </h1>
-        <div class="account-wall">        
-            <form class="form-signin" action="/user/login" method="POST">
-                <?php if ($_smarty_tpl->tpl_vars['user']->value&&$_smarty_tpl->tpl_vars['user']->value['login']['message']&&$_smarty_tpl->tpl_vars['user']->value['login']['status']=='failure'){?>
+            <div class="account-wall">        
+                <form class="form-signin" action="/user/login" method="POST">
+                    <?php if ($_smarty_tpl->tpl_vars['user']->value&&$_smarty_tpl->tpl_vars['user']->value['login']['message']&&$_smarty_tpl->tpl_vars['user']->value['login']['status']=='failure'){?>
                     <label><?php echo $_smarty_tpl->tpl_vars['user']->value['login']['message'];?>
 </label>
-                <?php }?>
-                <input name="user" type="text" class="form-control" placeholder="Email or Username" required autofocus>
-                <input name="pass" type="password" class="form-control" placeholder="Password" required>
-                <button class="btn btn-lg btn-primary btn-block" type="submit">
-                    Sign in</button>
-                <label class="checkbox pull-left">
-                    <input type="checkbox" value="remember-me">
-                    Remember me
-                </label>
-                <a href="#" class="pull-right need-help">Need help? </a><span class="clearfix"></span>
-            </form>
+                    <?php }?>
+                    <input name="user" type="text" class="form-control" placeholder="Email or Username" required autofocus>
+                    <input name="pass" type="password" class="form-control" placeholder="Password" required>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">
+                        Sign in</button>
+                    <!--
+                    <label class="checkbox pull-left">
+                        <input type="checkbox" value="remember-me">
+                        Remember me
+                    </label>
+                    //-->
+                    <a href="#" class="pull-right need-help">Need help? </a><span class="clearfix"></span>
+                </form>
+            </div>
+            <a href="#newAccount" class="text-center new-account">Create an account </a>
         </div>
-        <a href="/user/newAccount" class="text-center new-account">Create an account </a>
     </div>
 </div><?php }} ?>

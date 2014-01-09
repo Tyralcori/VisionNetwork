@@ -83,9 +83,11 @@ class userLIB {
         $post['email'] = mysql_real_escape_string($post['email']) ? mysql_real_escape_string($post['email']) : '';
 
         // AGBS?
+        /*
         if (empty($post['agb'])) {
             $validationErrors['registration'][] = array('agb' => 'Please accept the AGBs!');
         }
+        */
         // Is email okay?
         if (empty($post['email']) || !filter_var($post['email'], FILTER_VALIDATE_EMAIL)) {
             $validationErrors['registration'][] = array('email' => 'Enter a valid E-Mail');
@@ -151,6 +153,9 @@ class userLIB {
      */
     public function logout() {
         $this->ci->session->sess_destroy();
+        // Load helper for redirect
+        $this->ci->load->helper('url');
+        redirect('/', 'refresh'); // Attention, HTTPS LAYER!
     }
 
     /**
@@ -194,7 +199,7 @@ class userLIB {
         }
         return;
     }
-    
+
     /**
      * Ban function - bans user..?!
      * @param type $userID
@@ -202,26 +207,26 @@ class userLIB {
      */
     public function ban($userID, $bannedUntil = null, $bannedReason = null) {
         // userID must be given
-        if(empty($userID)) {
+        if (empty($userID)) {
             return;
         }
         // Ban user - banned bool
-        $banUserQuery = $this->ci->db->query("UPDATE login SET banned = 1 WHERE id = {$userID}"); 
-        
+        $banUserQuery = $this->ci->db->query("UPDATE login SET banned = 1 WHERE id = {$userID}");
+
         // If not empty banned until, ban until
-        if(!empty($bannedUntil)) {
+        if (!empty($bannedUntil)) {
             // If you won't enter datetime, you can enter "now", or just give an 1 to make datetime now
-            $possibleNow = array('now', 1, );
-            if(in_array($bannedUntil, $possibleNow)) {
+            $possibleNow = array('now', 1,);
+            if (in_array($bannedUntil, $possibleNow)) {
                 $objDateTime = new DateTime('NOW');
                 $bannedUntil = $objDateTime->format('Y-m-d H:i:s');
             }
-            $banUserQueryUntil = $this->ci->db->query("UPDATE login SET bannedUntil = '{$bannedUntil}' WHERE id = {$userID}"); 
+            $banUserQueryUntil = $this->ci->db->query("UPDATE login SET bannedUntil = '{$bannedUntil}' WHERE id = {$userID}");
         }
-        
+
         // If not empty reason, set reason
-        if(!empty($bannedReason)) {
-            $banUserQueryReason = $this->ci->db->query("UPDATE login SET bannedReason = '{$bannedReason}' WHERE id = {$userID}"); 
+        if (!empty($bannedReason)) {
+            $banUserQueryReason = $this->ci->db->query("UPDATE login SET bannedReason = '{$bannedReason}' WHERE id = {$userID}");
         }
         return;
     }

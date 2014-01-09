@@ -3,7 +3,7 @@
         <label>Enter a channel</label>
         <div class="form-group">
             <div class="col-sm-10">
-                <input type="channel" name="channel" class="form-control" id="channelID" placeholder="frostjoke">
+                <input type="channel" name="channel" class="form-control" id="channelID" placeholder="Channelname..">
             </div>
         </div>
         <div class="form-group">

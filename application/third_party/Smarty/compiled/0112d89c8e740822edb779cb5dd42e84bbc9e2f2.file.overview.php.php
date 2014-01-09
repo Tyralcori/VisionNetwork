@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2013-11-22 14:27:58
+<?php /* Smarty version Smarty-3.1.13, created on 2014-01-03 12:09:15
          compiled from "application/views/ELEMENTS/overview.php" */ ?>
 <?php /*%%SmartyHeaderCode:623597636527a08babc49b7-23400027%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '0112d89c8e740822edb779cb5dd42e84bbc9e2f2' => 
     array (
       0 => 'application/views/ELEMENTS/overview.php',
-      1 => 1385126861,
+      1 => 1388745359,
       2 => 'file',
     ),
   ),
@@ -24,7 +24,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
         <label>Enter a channel</label>
         <div class="form-group">
             <div class="col-sm-10">
-                <input type="channel" name="channel" class="form-control" id="channelID" placeholder="frostjoke">
+                <input type="channel" name="channel" class="form-control" id="channelID" placeholder="Channelname..">
             </div>
         </div>
         <div class="form-group">

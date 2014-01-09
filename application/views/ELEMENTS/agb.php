@@ -1,0 +1,1 @@
+By creating a new account, you accept following terms:

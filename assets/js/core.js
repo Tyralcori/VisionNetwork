@@ -21,5 +21,17 @@ $(document).ready(function() {
         }
     });
 
+    // Message refresh - each channel you are in
+    var postData = {flushAllChannels: true};
+    $.ajax({
+        url: "http://dev.portfolio.de/message/recive/",
+        type: "POST",
+        data: postData,
+        dataType: 'json',
+        success: function(data) {
+            console.log(data);
+        }
+    });
+
     // ...
 });

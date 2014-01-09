@@ -148,6 +148,9 @@ class launcher extends CI_Controller {
                 $options[str_replace('LIB', '',$executer)][$subexecuter] = $output;
             }
         }
+        
+        // Try session refresh after executer
+        $options['userSession'] = $this->session->all_userdata();
         // ====================== ACTION LIB LOADER ====================== //
         
         
