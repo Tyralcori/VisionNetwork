@@ -381,6 +381,28 @@ class channelLIB {
         return $getTopic;
     }
 
+    public function changeTopic() {
+        // GET topic by post form
+        $newTopic = $_POST['topicName'] ? $_POST['topicName'] : '';
+        $newTopicSafe = html_entity_decode($newTopic);
+        // GET channel
+        $channelBy = $_POST['channelTopic'] ? $_POST['channelTopic'] : '';
+        $channelBySafe = html_entity_decode($channelBy);
+
+        // If empty, return
+        if (empty($newTopicSafe) || empty($channelBySafe)) {
+            return;
+        }
+
+        // Update topic
+        $setTopic = $this->ci->db->query("UPDATE channels SET topic = '{$newTopicSafe}' WHERE name = '{$channelBySafe}'");
+
+        // Load helper for redirect
+        $this->ci->load->helper('url');
+        redirect('/', 'refresh'); // Attention, HTTPS LAYER!  
+        return true;
+    }
+
     /**
      * Set connection for a user in a channel
      * @param type $channelID

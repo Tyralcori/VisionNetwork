@@ -159,7 +159,7 @@ class launcher extends CI_Controller {
         $this->getset_globalViewOptions($options);
         // ====================== OPTION SETTER ====================== //
         
-        //var_dump($options);die();
+        //var_dump($options['userSession']['currentChannels']);die();
         // ====================== OPTIONS MEETS TEMPLATE ====================== //
         // Load portal view with options we've setted
         $this->load->view('index', $options);

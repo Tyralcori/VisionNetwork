@@ -67,11 +67,11 @@ class messageLIB {
         // If empty channel, return
         if (empty($channel)) {
             // Dirty hack, i know..
-            $serverTempName = (int) str_replace('/message/recive/', '', $_SERVER['REQUEST_URI']);
+            // $serverTempName = (int) str_replace('/message/recive/', '', $_SERVER['REQUEST_URI']); | Will change this
 
             // Set default channel
-            $channel = $serverTempName ? $serverTempName : "default";
-            //return;
+            //$channel = $serverTempName ? $serverTempName : "default";
+            $channel = 'default';
         }
 
         // If Ajax Request, return json format
@@ -137,6 +137,7 @@ class messageLIB {
         // Return all the messages in json?
         if (!empty($json)) {
             echo json_encode($messageContainer);
+            die();
         }
 
         // Return all the messages
