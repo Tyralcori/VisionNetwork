@@ -381,6 +381,10 @@ class channelLIB {
         return $getTopic;
     }
 
+    /**
+     * Change Topic
+     * @return boolean
+     */
     public function changeTopic() {
         // GET topic by post form
         $newTopic = $_POST['topicName'] ? $_POST['topicName'] : '';
