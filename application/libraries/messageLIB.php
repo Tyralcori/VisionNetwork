@@ -85,7 +85,7 @@ class messageLIB {
             // Get current user
             $session = $this->ci->session->all_userdata();
             // Get all channels
-            $allChannelIDs = $this->ci->db->query("SELECT DISTINCT channelID FROM vision.connections WHERE userID = {$session['id']}");
+            $allChannelIDs = $this->ci->db->query("SELECT DISTINCT channelID FROM connections WHERE userID = {$session['id']}");
 
             // Channel Container
             $channelContainer = array();
@@ -118,7 +118,7 @@ class messageLIB {
         // Foreach channel
         foreach ($channelIDs as $channelID => $channelName) {
             // Get messgaes
-            $messageQuery = $this->ci->db->query("SELECT * FROM messages WHERE channelID LIKE '{$channelID}' ORDER BY timestamp ASC");
+            $messageQuery = $this->ci->db->query("SELECT m.*, l.username FROM messages as m, login as l WHERE m.channelID LIKE '{$channelID}' AND m.userID = l.id ORDER BY timestamp ASC");
 
             // Add some nice messages!
             foreach ($messageQuery->result() as $key => $value) {

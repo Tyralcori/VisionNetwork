@@ -24,7 +24,7 @@
                         <a style="cursor:pointer;" data-toggle="modal" data-target="#join">Join</a> | <a href="/user/logout/" class="clientLogout">Logout</a>
                     </div>
 
-                    <div class="contentChat">
+                    <div class="contentChat chat_{$item.name}">
                         {foreach name=name item=logLine from=$item.log}
                         [{$logLine.timestamp}] {$logLine.username}: {$logLine.message}<br/>
                         {/foreach}                        
