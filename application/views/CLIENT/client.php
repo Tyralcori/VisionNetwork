@@ -4,7 +4,7 @@
             {assign var=zaehler value=0}
             {foreach name=name item=item from=$userSession.currentChannels}
             <li {if $zaehler == 0}class="active"{/if}>
-                <a href="#{$item.name}" data-toggle="tab" class="channelTabs">{$item.name}</a>
+                <a href="#{$item.name}" data-toggle="tab" class="channelTabs" id="{$zaehler}">{$item.name}</a>
             </li>
             {assign var=zaehler value=$zaehler+1}
             {/foreach}            

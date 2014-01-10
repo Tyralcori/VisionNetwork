@@ -2,7 +2,8 @@ $(document).ready(function() {
     // For correct view
     $('.channelTabs')[1].click();
     $('.channelTabs')[0].click();
-    
+
+    // some nice key mapping functions
     // Message SEND
     $('.message').keyup(function(e) {
         if (e.keyCode === 13) {
@@ -24,6 +25,20 @@ $(document).ready(function() {
             $('.message').val('');
         }
     });
+
+    // Change channels by strike arrow keys - currently maybe a little bit dirty
+    $(document).keyup(function(e) {
+        if(e.keyCode === 37) {
+            // Tab left
+            $('#' + (parseInt($('li.active > a').attr('id')) - 1)).click();
+        }
+        
+        if(e.keyCode === 39) {
+            // Tab right
+            $('#' + (parseInt($('li.active > a').attr('id')) + 1)).click();
+        }
+    });
+    // some nice key mapping functions end
 
     // Message refresh - each channel you are in
     var postDataMessage = {flushAllChannels: true};
