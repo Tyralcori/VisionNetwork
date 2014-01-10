@@ -21,7 +21,7 @@ $(document).ready(function() {
                 dataType: "JSON",
                 type: "POST",
                 success: function(data) {
-                    console.log(data);
+                    //console.log(data);
                 }
             });
 
@@ -67,7 +67,7 @@ $(document).ready(function() {
                 });
             }
         });
-        console.log("REFRESH");
+        //console.log("REFRESH");
     }
 
     // Topic change
