@@ -1,5 +1,6 @@
 $(document).ready(function() {
     // For correct view
+    window.scrollTo(0,0);
     $('.channelTabs')[1].click();
     $('.channelTabs')[0].click();
     
