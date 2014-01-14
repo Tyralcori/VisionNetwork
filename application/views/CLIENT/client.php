@@ -19,11 +19,11 @@
                     <div class="nickList">
                         {foreach name=name item=nickname from=$item.nicks}
                         <label>{$nickname}</label><br/>
-                        {/foreach}
-                        <br/><br/>
-                        <a style="cursor:pointer;" data-toggle="modal" data-target="#join">Join</a> | <a href="/user/logout/" class="clientLogout">Logout</a>
+                        {/foreach}                       
                     </div>
-
+                    <div class="options">
+                        <a style="cursor:pointer;" data-toggle="modal" data-target="#settings">Settings</a> | <a style="cursor:pointer;" data-toggle="modal" data-target="#profile">Profile</a> | <a style="cursor:pointer;" data-toggle="modal" data-target="#join">Join</a> | <a href="/user/logout/" class="clientLogout">Logout</a>
+                    </div>
                     <div class="contentChat chat_{$item.name}">
                         {foreach name=name item=logLine from=$item.log}
                         [{$logLine.timestamp}] {$logLine.username}: {$logLine.message}<br/>
@@ -32,9 +32,67 @@
                 </div>
             </div>
             {/foreach}
-            <div class="input">
+            <div class="input messageInput">
                 <input type="message" class="form-control message" id="message" placeholder="Message..">
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="settings" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <h4 class="modal-title">Edit settings</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal form-channel" action="/settings/edit" method="POST" role="form">
+                    <label>Global settings</label>
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" value="">
+                                    BLA BLA 
+                                </label>
+                            </div>
+                        </div>
+                    </div> 
+                    <button type="submit" name="join" class="btn btn-default">Save changes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </form>
+            </div>           
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="profile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <h4 class="modal-title">Edit profile</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal form-channel" action="/profile/edit" method="POST" role="form">
+                    <label>Upload Avatar</label>
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            <input type="channel" name="channel" class="form-control" id="avatar" placeholder="Path...">
+                        </div>
+                    </div> 
+
+                    <label>Bio</label>
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            <textarea id="bio" class="form-control" rows="3"></textarea>
+                        </div>
+                    </div> 
+                    <button type="submit" name="join" class="btn btn-default">Save changes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </form>
+            </div>           
         </div>
     </div>
 </div>

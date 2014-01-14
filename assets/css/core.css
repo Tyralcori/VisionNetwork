@@ -55,6 +55,12 @@
     border-top-right-radius: 0;
 }
 
+.messageInput {
+    position:absolute;
+    bottom:0px;
+    width:100%;
+}
+
 .account-wall {
     margin-top: 20px;
     padding: 40px 0px 20px 0px;
@@ -148,7 +154,7 @@
     position:absolute;
     top:0px;
     left:0px;
-    height:5%;
+    height:25px;
     min-height:25px;
     width:100%;
     background-color:#d3d3d3;   
@@ -169,21 +175,24 @@
     top:5px;
     left:80%;
     width:20%;
-    height:99%;
+    height:90%;
+}
+
+.options {
+    position:absolute;
+    float:left;
+    bottom:55px;
+    right:5px;
+    width:20%;
 }
 
 .contentChat {
     position:absolute;
-    top:5px;
+    top:10px;
     left:0px;
-    width:80%;
-    height:99%;
-}
-
-.input {
-    position:absolute;
-    bottom:0px;
-    width:100%;
+    width:78%;
+    height:90%;
+    overflow-y:scroll;
 }
 /* CHANNEL CLIENT */
 
