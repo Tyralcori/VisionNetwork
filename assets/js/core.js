@@ -5,6 +5,7 @@ $(document).ready(function() {
     $('.channelTabs')[0].click();
     
     // Message refresh
+    refreshLogs();
     setInterval(refreshLogs, 1000);
 
     // some nice key mapping functions
@@ -65,6 +66,7 @@ $(document).ready(function() {
                     $.each(messages, function(messageNum, messageArr) {
                         $(currentChatTab).append("[" + messageArr.timestamp + "] " + messageArr.username + ": "+ messageArr.message + "<br/>");
                     });
+                    $(".contentChat").scrollTop($('.contentChat')[0].scrollHeight);
                 });
             }
         });
