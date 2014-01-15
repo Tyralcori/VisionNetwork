@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2014-01-03 11:39:16
+<?php /* Smarty version Smarty-3.1.13, created on 2014-01-15 15:41:24
          compiled from "application/views/CONTENT/default.php" */ ?>
-<?php /*%%SmartyHeaderCode:21119792535277725ccb44f5-57738857%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:77276137052d69e14c87850-02721996%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,19 +11,19 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '21119792535277725ccb44f5-57738857',
+  'nocache_hash' => '77276137052d69e14c87850-02721996',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.13',
-  'unifunc' => 'content_5277725ccb5441_88297786',
   'variables' => 
   array (
     'userSession' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.13',
+  'unifunc' => 'content_52d69e14d2bf08_86354878',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5277725ccb5441_88297786')) {function content_5277725ccb5441_88297786($_smarty_tpl) {?><?php if ($_smarty_tpl->tpl_vars['userSession']->value&&isset($_smarty_tpl->tpl_vars['userSession']->value['email'])){?>
+<?php if ($_valid && !is_callable('content_52d69e14d2bf08_86354878')) {function content_52d69e14d2bf08_86354878($_smarty_tpl) {?><?php if ($_smarty_tpl->tpl_vars['userSession']->value&&isset($_smarty_tpl->tpl_vars['userSession']->value['email'])){?>
     <?php if (isset($_smarty_tpl->tpl_vars['userSession']->value['banned'])&&$_smarty_tpl->tpl_vars['userSession']->value['banned']){?>
         <?php echo $_smarty_tpl->getSubTemplate ("ELEMENTS/banned.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array(), 0);?>
 

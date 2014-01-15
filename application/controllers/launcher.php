@@ -38,12 +38,20 @@ class launcher extends CI_Controller {
      * Index Action
      * @param type $page
      */
-    public function index($page = null, $subpage = null) {
+    public function index($page = null, $subpage = null) {        
         // ====================== OPTIONS ====================== //
         // Call options - give this array to the template
         $options = array();
         // ====================== OPTIONS ====================== //
-
+        
+                
+        // ====================== CHECK OUTER ====================== //
+        if(isset($_GET) && isset($_GET['out']) && !empty($_GET['out'])) {
+            // My gawd, outer link
+            $options['outerLink'] = htmlspecialchars($_GET['out']);
+        }
+        // ====================== CHECK OUTER ====================== //
+        
         
         // ====================== GLOBAL CONFIG ====================== //
         // Load the config 
@@ -53,8 +61,8 @@ class launcher extends CI_Controller {
         
         
         // ====================== GET SERVERLIST ====================== //
-        $this->load->library('serverreflection');
-        $onlineServer = $this->serverreflection->get();
+        // $this->load->library('serverreflection');
+        //$onlineServer = $this->serverreflection->get();
         // ====================== GET SERVERLIST ====================== //
        
         
@@ -94,7 +102,7 @@ class launcher extends CI_Controller {
         
         // ====================== TEMPLATE MANAGER ====================== //
         // Load template
-        # $this->load->library('templatemanager'); # In Progress
+        // $this->load->library('templatemanager'); # In Progress
         // ====================== TEMPLATE MANAGER ====================== //
         
 
@@ -157,7 +165,7 @@ class launcher extends CI_Controller {
         // ====================== OPTION SETTER ====================== //
         // SET options in Public Element
         $this->getset_globalViewOptions($options);
-        // ====================== OPTION SETTER ====================== //
+        // ====================== OPTION SETTER ====================== //        
         
         //var_dump($options['userSession']['currentChannels']);die();
         // ====================== OPTIONS MEETS TEMPLATE ====================== //

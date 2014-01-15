@@ -39,7 +39,7 @@ class messageLIB {
         // Make input sql friendly
         $channel = htmlspecialchars($channel);
         $message = htmlspecialchars($message);
-
+        $message = preg_replace('!(http://[a-z0-9_./?=&-]+)!i', '<a href="?out=$1" target="_blank">$1</a> ', $message." ");
         // Get userID
         if (empty($userID)) {
             $userID = $this->ci->session->userdata('id') ? $this->ci->session->userdata('id') : 0;
