@@ -44,11 +44,11 @@ class channelLIB {
 
             // Overwrite default
             if (!empty($_POST) && !empty($_POST['channel'])) {
-                $channelName = html_entity_decode($_POST['channel']);
+                $channelName = htmlspecialchars($_POST['channel']);
             }
         }
         // Make input sql friendly
-        $channelName = html_entity_decode($channelName);
+        $channelName = htmlspecialchars($channelName);
 
         // Get userID
         if (empty($userID)) {
@@ -388,10 +388,10 @@ class channelLIB {
     public function changeTopic() {
         // GET topic by post form
         $newTopic = $_POST['topicName'] ? $_POST['topicName'] : '';
-        $newTopicSafe = html_entity_decode($newTopic);
+        $newTopicSafe = htmlspecialchars($newTopic);
         // GET channel
         $channelBy = $_POST['channelTopic'] ? $_POST['channelTopic'] : '';
-        $channelBySafe = html_entity_decode($channelBy);
+        $channelBySafe = htmlspecialchars($channelBy);
 
         // If empty, return
         if (empty($newTopicSafe) || empty($channelBySafe)) {

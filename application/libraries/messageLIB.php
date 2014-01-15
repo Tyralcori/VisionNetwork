@@ -37,8 +37,8 @@ class messageLIB {
         }
 
         // Make input sql friendly
-        $channel = html_entity_decode($channel);
-        $message = html_entity_decode($message);
+        $channel = htmlspecialchars($channel);
+        $message = htmlspecialchars($message);
 
         // Get userID
         if (empty($userID)) {
