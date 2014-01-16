@@ -1,13 +1,17 @@
 $(document).ready(function() {
     // For correct view
     window.scrollTo(0,0);
-    $('.channelTabs')[1].click();
-    $('.channelTabs')[0].click();
     
-    // Message refresh
-    refreshLogs();
-    setInterval(refreshLogs, 1000);
-
+    if(typeof $('.channelTabs')[1] != "undefined") {
+        $('.channelTabs')[1].click();
+        $('.channelTabs')[0].click();
+    }
+    
+    if(typeof $('.channelTabs')[0] != "undefined") {
+        // Message refresh
+        refreshLogs();
+        setInterval(refreshLogs, 1000);
+    }
     // some nice key mapping functions
     // Message SEND
     $('.message').keyup(function(e) {
