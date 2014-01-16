@@ -1,13 +1,13 @@
 $(document).ready(function() {
     // For correct view
-    window.scrollTo(0,0);
-    
-    if(typeof $('.channelTabs')[1] != "undefined") {
+    window.scrollTo(0, 0);
+
+    if (typeof $('.channelTabs')[1] != "undefined") {
         $('.channelTabs')[1].click();
         $('.channelTabs')[0].click();
     }
-    
-    if(typeof $('.channelTabs')[0] != "undefined") {
+
+    if (typeof $('.channelTabs')[0] != "undefined") {
         // Message refresh
         refreshLogs();
         setInterval(refreshLogs, 1000);
@@ -68,11 +68,32 @@ $(document).ready(function() {
 
                     // Create new log foreach message
                     $.each(messages, function(messageNum, messageArr) {
-                        $(currentChatTab).append("[" + messageArr.timestamp + "]  <a  data-toggle='modal' data-target='#setcard' class='user chatUser level" + messageArr.level + "'>" + messageArr.username + "</a>: "+ messageArr.message + "<br/>");
+                        $(currentChatTab).append("[" + messageArr.timestamp + "]  <a  data-toggle='modal' data-target='#setcard' class='user chatUser level" + messageArr.level + "'>" + messageArr.username + "</a>: " + messageArr.message + "<br/>");
                     });
                     $(".contentChat").scrollTop($('.contentChat')[0].scrollHeight);
                 });
+                regHooks();
             }
+        });
+    }
+
+    // Sets hook on each user
+    function regHooks() {
+        // Ajax request to load infos into setcard
+        $('.chatUser').off("click");
+        $('.chatUser').on("click", function() {
+            var userClick = $(this);
+            var postDataMessage = {user: userClick.html()};
+            $.ajax({
+                url: "/profile/show/",
+                type: "POST",
+                data: postDataMessage,
+                dataType: 'json',
+                success: function(data) {
+                    // Render data in modal
+                    console.log(data);
+                }
+            });
         });
     }
 
@@ -83,6 +104,6 @@ $(document).ready(function() {
         $('.topicName').attr('placeholder', $(chan).html());
         $('.hiddenChannelValue').val($('.nav > .active > a').html());
     });
-    
+
     // ...
 });
