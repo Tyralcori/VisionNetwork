@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS login (
 `bannedUnitl` datetime,
 `bannedReason` varchar(500),
 `banCounter` int(5),
+`globalPermission` int(5),
 PRIMARY KEY(id)
 );
 
