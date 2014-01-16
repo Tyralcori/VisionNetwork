@@ -18,7 +18,7 @@
                 <div class="bottomChannel">
                     <div class="nickList">
                         {foreach name=name item=nickname from=$item.nicks}
-                        <label>{$nickname}</label><br/>
+                        <label class="level{$nickname.level}">{$nickname.name}</label><br/>
                         {/foreach}                       
                     </div>
                     <div class="options">

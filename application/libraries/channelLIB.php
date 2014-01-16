@@ -158,14 +158,14 @@ class channelLIB {
         }
 
         // Query all users in channel
-        $nickListQuery = $this->ci->db->query("SELECT DISTINCT login.username FROM connections, login WHERE connections.userID = login.id AND connections.channelID = {$channelID}");
+        $nickListQuery = $this->ci->db->query("SELECT DISTINCT login.username, login.globalPermission FROM connections, login WHERE connections.userID = login.id AND connections.channelID = {$channelID}");
 
         // Nick List container
         $nickList = array();
 
         // Fill Container
         foreach ($nickListQuery->result() as $key => $value) {
-            $nickList[] = $value->username;
+            $nickList[] = array('name' => $value->username, 'level' => $value->globalPermission);
         }
 
         // Return filled container

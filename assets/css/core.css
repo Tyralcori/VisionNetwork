@@ -199,7 +199,6 @@
 /* CHANNEL CLIENT */
 
 /* NEW FRONTEND */
-
 #sidebar-wrapper {
     margin-right: -250px;
     right: 0;
@@ -317,3 +316,13 @@
     color:#555;
 }
 /* NEW FRONTEND */
+
+/* STYLES NICKLIST */
+.level99 {
+    color:darkred;
+}
+
+.level0 {
+    color:grey;
+}
+/* STYLES NICKLIST */
