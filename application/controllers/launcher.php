@@ -77,11 +77,8 @@ class launcher extends CI_Controller {
         // SESSION refresh and write into model
         $options['user'] = array();
 
-        $userData = array();
-        $this->session->set_userdata($userData);        
-        //$this->session->sess_destroy();
-        $session = $this->session->all_userdata();
         
+        $session = $this->session->all_userdata();
         $options['userSession'] = $session ? $session : '';
         
         if(!empty($options['userSession']['id'])) {

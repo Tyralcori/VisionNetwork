@@ -1,6 +1,6 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2014-01-03 13:54:56
+<?php /* Smarty version Smarty-3.1.13, created on 2014-01-16 10:33:31
          compiled from "application/views/ELEMENTS/login.php" */ ?>
-<?php /*%%SmartyHeaderCode:19327174665279fb4772f771-19833407%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:60337016152d7a76b999ee1-78843600%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
@@ -11,20 +11,20 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '19327174665279fb4772f771-19833407',
+  'nocache_hash' => '60337016152d7a76b999ee1-78843600',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.13',
-  'unifunc' => 'content_5279fb477c8956_97811174',
   'variables' => 
   array (
     'title' => 0,
     'user' => 0,
   ),
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.13',
+  'unifunc' => 'content_52d7a76ba72d73_79775365',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_5279fb477c8956_97811174')) {function content_5279fb477c8956_97811174($_smarty_tpl) {?><div id="login">
+<?php if ($_valid && !is_callable('content_52d7a76ba72d73_79775365')) {function content_52d7a76ba72d73_79775365($_smarty_tpl) {?><div id="login">
     <div class="container">
         <div class="loginMask">
             <h1 class="text-center login-title">Sign in to continue to <?php echo $_smarty_tpl->tpl_vars['title']->value;?>
