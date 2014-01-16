@@ -18,7 +18,7 @@
                 <div class="bottomChannel">
                     <div class="nickList">
                         {foreach name=name item=nickname from=$item.nicks}
-                        <label class="level{$nickname.level}">{$nickname.name}</label><br/>
+                        <a data-toggle="modal" data-target="#setcard" class="user chatUser level{$nickname.level}">{$nickname.name}</a><br/>
                         {/foreach}                       
                     </div>
                     <div class="options">
@@ -26,7 +26,7 @@
                     </div>
                     <div class="contentChat chat_{$item.name}">
                         {foreach name=name item=logLine from=$item.log}
-                        [{$logLine.timestamp}] {$logLine.username}: {$logLine.message}<br/>
+                        [{$logLine.timestamp}] <a data-toggle="modal" data-target="#setcard" class="user chatUser level{$logLine.level}">{$logLine.username}</a>: {$logLine.message}<br/>
                         {/foreach}                        
                     </div>
                 </div>
@@ -62,6 +62,30 @@
                     <button type="submit" name="join" class="btn btn-default">Save changes</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </form>
+            </div>           
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="setcard" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <h4 class="modal-title">User profile</h4>
+            </div>
+            <div class="modal-body">
+                <label>This is bla bla</label>
+                <div class="form-group">
+                    <div class="col-sm-10">
+                        <div class="checkbox">
+                            <label>
+                                BLA BLA 
+                            </label>
+                        </div>
+                    </div>
+                </div> 
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>           
         </div>
     </div>

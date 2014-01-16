@@ -441,7 +441,7 @@ class channelLIB {
         }
 
         // Get messgaes
-        $messageQuery = $this->ci->db->query("SELECT messages.*, login.username AS username FROM messages, login WHERE channelID LIKE '{$channelID}' AND messages.userID = login.id ORDER BY timestamp ASC LIMIT {$limit}");
+        $messageQuery = $this->ci->db->query("SELECT messages.*, login.username AS username, login.globalPermission AS level FROM messages, login WHERE channelID LIKE '{$channelID}' AND messages.userID = login.id ORDER BY timestamp ASC LIMIT {$limit}");
 
         // Message Container
         $messageContainer = array();

@@ -318,6 +318,14 @@
 /* NEW FRONTEND */
 
 /* STYLES NICKLIST */
+.chatUser {
+    font-weight:bold;
+}
+
+.user:hover {
+    cursor:pointer;
+}
+
 .level99 {
     color:darkred;
 }

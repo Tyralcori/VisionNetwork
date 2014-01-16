@@ -68,13 +68,12 @@ $(document).ready(function() {
 
                     // Create new log foreach message
                     $.each(messages, function(messageNum, messageArr) {
-                        $(currentChatTab).append("[" + messageArr.timestamp + "] " + messageArr.username + ": "+ messageArr.message + "<br/>");
+                        $(currentChatTab).append("[" + messageArr.timestamp + "]  <a  data-toggle='modal' data-target='#setcard' class='user chatUser level" + messageArr.level + "'>" + messageArr.username + "</a>: "+ messageArr.message + "<br/>");
                     });
                     $(".contentChat").scrollTop($('.contentChat')[0].scrollHeight);
                 });
             }
         });
-        //console.log("REFRESH");
     }
 
     // Topic change
