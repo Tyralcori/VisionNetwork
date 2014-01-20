@@ -127,6 +127,17 @@ class userLIB {
             $post['pass'] = $this->hashPasword($post['pass']);
             // Insert Account
             $queryInsert = $this->ci->db->query("INSERT INTO login (email,password,username,firstlogin,lastlogin,banned) VALUES ('{$post['email']}','{$post['pass']}','{$post['user']}',NOW(),NOW(),0)");
+            
+            // Get userID
+            $userID = $this->ci->db->query("SELECT `id` FROM login WHERE username = '{$post['user']}'")->row()->id;
+            $profileInsert = $this->ci->db->query("INSERT INTO profiles (userID,bio,birthdate,avatar,visits) VALUES ('{$userID}','No bio','0000-00-00 00:00:00','profilePic/default.png',0)");
+            
+            
+            // Some profile edit
+            if(!empty($userID)) {
+                
+            }
+            
             // Its done
             return array('registration' => array('done' => 'Registerd successfully. You can now login!'));
         }

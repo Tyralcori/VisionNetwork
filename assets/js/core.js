@@ -92,6 +92,33 @@ $(document).ready(function() {
                 success: function(data) {
                     // Render data in modal
                     console.log(data);
+                    // Check, if user not found
+                    if(data.message) {
+                        $('.setcard_name').html(data.message);
+                        exit;
+                    }
+                    
+                    // Realname
+                    if (!!data.realName) {
+                        $('.setcard_name').html(data.realName + ' alias "' + userClick.html() + '"');
+                    } else {
+                        $('.setcard_name').html(userClick.html());
+                    }
+                    
+                    // Birthdate
+                    if(data.birthdate != '0000-00-00') {
+                        $('.setcard_born').html('Born in: ' + data.birthdate);
+                    }
+                    
+                    // Bio
+                    if (!!data.bio) {
+                        $('.setcard_bio').html(data.bio);
+                    }
+                    
+                    // Avatar
+                    if(!!data.avatar) {
+                        $('.setcard_picture').html('<img class="setcartd_picture_src img-circle" src="' + window.location.href + data.avatar + '"/>');
+                    }                    
                 }
             });
         });

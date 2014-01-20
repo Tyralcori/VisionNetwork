@@ -333,4 +333,18 @@
 .level0 {
     color:grey;
 }
+
+.setcard_picture {
+    
+}
+
+.setcartd_picture_src {
+    height:64px;
+    width:64px;
+    background:  no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
 /* STYLES NICKLIST */

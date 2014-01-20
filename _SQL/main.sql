@@ -3,7 +3,7 @@ CREATE DATABASE IF NOT EXISTS vision;
 -- USE THE DATABASE
 USE vision;
 
--- LOGIN TABLE 2013/11/08
+-- LOGIN TABLE 2014/01/20
 CREATE TABLE IF NOT EXISTS login (
 `id` int(5) AUTO_INCREMENT,
 `email` varchar(255) NOT NULL,
@@ -56,4 +56,16 @@ CREATE TABLE IF NOT EXISTS messages (
 `message` varchar(500) NOT NULL,
 `timestamp` datetime,
 PRIMARY KEY(`id`)
+);
+
+-- PROFILE TABLE 2014/01/20
+CREATE TABLE IF NOT EXISTS profiles (
+`id` int(5) AUTO_INCREMENT,
+`userID` int(5) NOT NULL,
+`bio` text,
+`birthdate` datetime,
+`avatar` varchar(255),
+`visits` int(10),
+`realName` varchar(255),
+PRIMARY KEY(id)
 );

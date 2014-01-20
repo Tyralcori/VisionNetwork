@@ -1,3 +1,4 @@
+<!-- CLIENT START //-->
 <div class="client">
     <div class="naviChoose">
         <ul class="nav nav-tabs">
@@ -38,7 +39,9 @@
         </div>
     </div>
 </div>
+<!-- CLIENT END //-->
 
+<!-- SETTINGS MODAL START //-->
 <div class="modal fade" id="settings" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -66,7 +69,9 @@
         </div>
     </div>
 </div>
+<!-- SETTINGS MODAL END //-->
 
+<!-- SETCARD MODAL START //-->
 <div class="modal fade" id="setcard" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -75,13 +80,13 @@
                 <h4 class="modal-title">User profile</h4>
             </div>
             <div class="modal-body">
-                <label>This is bla bla</label>
+                <label class="setcard_picture"></label>
+                <label class="setcard_name">Loading user..</label>
                 <div class="form-group">
                     <div class="col-sm-10">
                         <div class="checkbox">
-                            <label>
-                                BLA BLA 
-                            </label>
+                            <label class="setcard_born"></label><br/>
+                            <label class="setcard_bio"></label>
                         </div>
                     </div>
                 </div> 
@@ -90,7 +95,9 @@
         </div>
     </div>
 </div>
+<!-- SETCARD MODAL END //-->
 
+<!-- PROFILE EDIT MODAL START //-->
 <div class="modal fade" id="profile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -120,7 +127,9 @@
         </div>
     </div>
 </div>
+<!-- PROFILE EDIT MODAL END //-->
 
+<!-- JOIN MODAL START //-->
 <div class="modal fade" id="join" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -143,7 +152,9 @@
         </div>
     </div>
 </div>
+<!-- JOIN MODAL END //-->
 
+<!-- TOPIC EDIT START //-->
 <div class="modal fade" id="topic" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -167,3 +178,4 @@
         </div>
     </div>
 </div>
+<!-- TOPIC EDIT END //-->
