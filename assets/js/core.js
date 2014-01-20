@@ -136,5 +136,21 @@ $(document).ready(function() {
         $('.hiddenChannelValue').val($('.nav > .active > a').html());
     });
 
+    // Helpcenter
+    $('.bottomBar').click(function() {
+        var height = $('.bottomBar').css('height');
+        if(height === "24px") {
+            // Expand
+            $('.bottomBar').animate({ height: 240 }, 600);
+        } else {
+            // Small Version
+            $('.bottomBar').animate({ height: 24 }, 600);
+        }
+    });
+    
+    // Hide helpcenter
+    $('.hideHelpcenter').click(function() {
+        $('.bottomBar').fadeOut();
+    })
     // ...
 });

@@ -333,11 +333,9 @@
 .level0 {
     color:grey;
 }
+/* STYLES NICKLIST */
 
-.setcard_picture {
-    
-}
-
+/* SETCARD */
 .setcartd_picture_src {
     height:64px;
     width:64px;
@@ -347,4 +345,53 @@
     -o-background-size: cover;
     background-size: cover;
 }
-/* STYLES NICKLIST */
+/* SETCARD */
+
+/* BOTTOM BAR */
+.bottomBar {
+    position:fixed;
+    bottom:0px;
+    right:5px;
+    width:180px;
+    height:24px;
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
+    border: 1px black solid;
+    background-color:darkgreen;
+    color:white;
+    text-align:center;
+    font-size:16px;
+}
+
+.helpcenter, .helpcenter:hover {
+    color:white;
+    text-decoration:none;
+}
+
+.helpcenter:hover {
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.helpcenterMore {
+    position:relative;
+    top:5px;
+    left:2px;
+    font-size:14px;
+    text-align:left;
+}
+
+.helpUL li {
+    margin-left:-15px;
+}
+
+.helpUL li a, .helpUL li a:hover {
+    color:white;
+    text-decoration:none;
+}
+
+.helpUL li a:hover {
+    text-decoration:underline;
+    cursor:pointer;
+}
+/* BOTTOM BAR */
