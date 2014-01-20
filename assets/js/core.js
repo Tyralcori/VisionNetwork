@@ -27,7 +27,7 @@ $(document).ready(function() {
                 dataType: "JSON",
                 type: "POST",
                 success: function(data) {
-                    //console.log(data);
+
                 }
             });
 
@@ -83,6 +83,7 @@ $(document).ready(function() {
         $('.chatUser').off("click");
         $('.chatUser').on("click", function() {
             var userClick = $(this);
+
             var postDataMessage = {user: userClick.html()};
             $.ajax({
                 url: "/profile/show/",
@@ -91,11 +92,14 @@ $(document).ready(function() {
                 dataType: 'json',
                 success: function(data) {
                     // Render data in modal
-                    console.log(data);
+
                     // Check, if user not found
                     if(data.message) {
                         $('.setcard_name').html(data.message);
-                        exit;
+                        $('.setcard_born').html('');
+                        $('.setcard_bio').html('');
+                        $('.setcard_picture').html('<img class="setcartd_picture_src img-circle" src="' + window.location.href + 'profilePic/default.png"/>');
+                        return;
                     }
                     
                     // Realname
