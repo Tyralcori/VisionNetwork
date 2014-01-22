@@ -25,6 +25,11 @@ class globalconfig {
                 'allowPrivateDebug' => true,
                 'version' => '0.5.2',
             ),
+            'profilePictures' => array(
+                'profilePicturesPATH' => $_SERVER['DOCUMENT_ROOT'] . '/profilePic', 
+                'allowedPictureExtension' => array('jpg','png'),
+                'allowedPictureSize' => -1,
+            ),
         );
     }
 }
