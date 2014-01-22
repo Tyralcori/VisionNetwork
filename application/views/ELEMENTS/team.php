@@ -11,7 +11,7 @@
                 <div class="service-item">
                     <img data-src="holder.js/140x140" class="img-circle" alt="140x140" src="https://fbcdn-sphotos-b-a.akamaihd.net/hphotos-ak-prn1/17496_10201233496190252_1385687456_n.jpg" style="width: 140px; height: 140px;">
                     <h4>Alexander Czichelski alias "ScarecrowLambda"</h4>
-                    <p>Leading Developer, not a good webdesigner</p>
+                    <p>Lead Software Developer</p>
                     <p></p>
                 </div>
             </div>           

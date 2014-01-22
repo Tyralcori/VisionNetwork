@@ -17,7 +17,8 @@
             <div class="col-md-2 col-md-offset-2 text-center">
                 <div class="service-item">
                     <br/>
-                    <p>&copy; Vision Network - Alexander Czichelski 2014</p>  
+                    <p>Copyright &copy; 2014 <a href="#top">Vision Network</a>, <a href="http://redsheepstudios.com/" target="_blank">RedSheep Studios</a> Alexander Czichelski</p>  
+                    <p>All rights reserved | Version {$version} | <a href="https://github.com/Tyralcori/VisionNetwork/tree/experimental" target="_blank">Fork me on GITHUB</a></p>
                     <br/><br/>
                     <p><a style="cursor:pointer;" data-toggle="modal" data-target="#infoModal">Imprint | Privacy <!--| AGB//--></a></p>
                 </div>
@@ -43,7 +44,7 @@
                 <br/>Adress only on (E-Mail) request - Please bear with me
                 <br/><br/>
                 <label>About Vision Network:</label><br/>
-                Vision Network is a hobby project. We earn no money by operating this site.
+                Vision Network is a hobby project, created by RedSheep Studios. We earn no money by operating this site.
             </div>
             <div class="modal-header">
                 <h4 class="modal-title">Privacy</h4>

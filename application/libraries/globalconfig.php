@@ -23,6 +23,7 @@ class globalconfig {
                 'assetsPLUGINSURL' => $_SERVER['SERVER_NAME'] . '/assets/plugins',
                 'template' => 'default',
                 'allowPrivateDebug' => true,
+                'version' => '0.5.2',
             ),
         );
     }
