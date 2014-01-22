@@ -62,10 +62,10 @@ class avatarLIB {
 
         // Deny double slash
         $tryLocateFileName = str_replace('//', '', $profilePicturePath . '/' . $specName);
-        
+
         // Placeholder
         $foundFile = '';
-        
+
         if (is_array($allowedExtensions)) {
             // Foreach given extension
             foreach ($allowedExtensions as $key => $extension) {
@@ -80,11 +80,46 @@ class avatarLIB {
                 $foundFile = $tryLocateFileName . '.' . $allowedExtensions;
             }
         }
-        
+
         // No image to the requested user
-        if(empty($foundFile)) {
+        if (empty($foundFile)) {
             return false;
         }
+
+        // Get infos about the image
+        $imageInfos = $this->getImageInfos($foundFile);
+
+        $size = array(
+            'height' => (int) ($imageInfos[0] ? $imageInfos[0] : 150),
+            'width' => (int) ($imageInfos[1] ? $imageInfos[1] : 150),
+        );
+
+        // Set mime
+        $mime = $imageInfos['mime'] ? $imageInfos['mime'] : 'image/' . $extension;
+
+        // Get extension
+        $finalExtension = explode('/', $mime);
+
+        // Set mime
+        header("Content-type: $mime");
+
+        // Switch on extension
+        switch ($finalExtension[1]) {
+            case 'jpeg':
+            case 'jpg':
+                $im = imagecreatefromjpeg($foundFile);
+                imagecopy($im, $im, 150, 150, 10, 10, 40, 40);
+                imagejpeg($im);
+                break;
+            case 'png':
+            default:
+                $im = imagecreatefrompng($foundFile);
+                imagecopy($im, $im, 150, 150, 10, 10, 40, 40);
+                imagepng($im);
+                break;
+        }
+        // Destroy image
+        imagedestroy($im);
     }
 
     /**
@@ -105,6 +140,28 @@ class avatarLIB {
 
         // Return hashed name
         return $newName;
+    }
+
+    /**
+     * Return infos about image (Currently size and mime only)
+     * @param type $pathToImage
+     * @return boolean
+     */
+    private function getImageInfos($pathToImage = null) {
+        // Image must not be empty and must be found
+        if (empty($pathToImage) || !file_exists($pathToImage)) {
+            return false;
+        }
+
+        // Get image size
+        $imageSize = getimagesize($pathToImage);
+
+        // Check and return
+        if (!empty($imageSize) && is_array($imageSize)) {
+            return $imageSize;
+        }
+
+        return false;
     }
 
 }
