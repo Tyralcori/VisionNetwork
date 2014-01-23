@@ -1,7 +1,11 @@
 <?php
 
 /**
- * Avatar lib
+ * AvatarLIB Class
+ * Recreates the given image
+ * @author Alexander Czichelski <a.czichelski@elitecoder.eu> | NO PRIVATE SUPPORT
+ * @version "soon"
+ * @todo 
  */
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
@@ -36,6 +40,11 @@ class avatarLIB {
         return false;
     }
 
+    /**
+     * Get image by name and recreates the image
+     * @param type $name
+     * @return boolean
+     */
     public function getImageByName($name = null) {
         // Empty name is not allowed
         // May return default picture?
@@ -108,13 +117,13 @@ class avatarLIB {
             case 'jpeg':
             case 'jpg':
                 $im = imagecreatefromjpeg($foundFile);
-                imagecopy($im, $im, 150, 150, 10, 10, 40, 40);
+                imagecopy($im, $im, $size['height'], $size['width'], 10, 10, 40, 40);
                 imagejpeg($im);
                 break;
             case 'png':
             default:
                 $im = imagecreatefrompng($foundFile);
-                imagecopy($im, $im, 150, 150, 10, 10, 40, 40);
+                imagecopy($im, $im, $size['height'], $size['width'], 10, 10, 40, 40);
                 imagepng($im);
                 break;
         }

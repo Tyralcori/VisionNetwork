@@ -12,8 +12,10 @@ class globalconfig {
      * Returns the config
      * @return boolean
      */
-    public function getConfig() {
-        return array(
+    public function getConfig($part = null) {
+        // Config
+        // ToDo: Into database, please
+        $config = array(
             'main' => array(
                 'title' => 'Vision Network',
                 'maintenance' => false,
@@ -31,5 +33,13 @@ class globalconfig {
                 'allowedPictureSize' => -1,
             ),
         );
+
+        // Return special config parts
+        if(!empty($part) && !empty($config[$part]) && is_array($config[$part])) {
+            return $config[$part];
+        }
+        
+        // Return complete config, if no special part needed
+        return $config;
     }
 }
