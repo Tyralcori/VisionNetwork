@@ -69,3 +69,17 @@ CREATE TABLE IF NOT EXISTS profiles (
 `realName` varchar(255),
 PRIMARY KEY(id)
 );
+
+-- REDDBOX TABLE 2014/01/23
+CREATE TABLE IF NOT EXISTS redbox (
+`id` int(5) AUTO_INCREMENT,
+`timeLoad` varchar(255) NOT NULL,
+`user` varchar(255) NOT NULL,
+`userAgent` varchar(255) NOT NULL,
+`ip` varchar(50) NOT NULL,
+`time` datetime,
+`site` varchar(100),
+`port` int(3) NOT NULL DEFAULT 80,
+`status` int(5) NOT NULL DEFAULT 200,
+PRIMARY KEY(id)
+);
