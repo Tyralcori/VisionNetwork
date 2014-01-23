@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-md-2 col-md-offset-2 text-center">
                 <div class="service-item">
-                    <img data-src="holder.js/140x140" class="img-circle" alt="140x140" src="http://dev.portfolio.de/avatar/?user=chaos" style="width: 140px; height: 140px;">
+                    <img data-src="holder.js/140x140" class="img-circle" alt="140x140" src="avatar/?user=chaos" style="width: 140px; height: 140px;">
                     <h4>Alexander Czichelski alias "ScarecrowLambda"</h4>
                     <p>Lead Software Developer</p>
                     <p></p>
