@@ -156,7 +156,12 @@ class launcher extends CI_Controller {
 
             // When we have an return, put it into output
             if (!empty($output)) {
-                $options[str_replace('LIB', '', $executer)][$subexecuter] = $output;
+                if(!empty($subexecuter)) {
+                    $options[str_replace('LIB', '', $executer)][$subexecuter] = $output;
+                } else {
+                    $options[str_replace('LIB', '', $executer)] = $output;
+                }
+                
             }
         }
 
@@ -168,13 +173,7 @@ class launcher extends CI_Controller {
         // ====================== OPTION SETTER ====================== //
         // SET options in Public Element
         $this->getset_globalViewOptions($options);
-        // ====================== OPTION SETTER ====================== //        
-        
-        //var_dump($options['userSession']['currentChannels']);die();
-        // ====================== OPTIONS MEETS TEMPLATE ====================== //
-        // Load portal view with options we've setted
-        $this->load->view('index', $options);
-        // ====================== OPTIONS MEETS TEMPLATE ====================== //
+        // ====================== OPTION SETTER ====================== //      
         
         
         // ====================== Profiling ====================== //
@@ -195,6 +194,12 @@ class launcher extends CI_Controller {
         // Add profile
         $this->addProfile($profile);
         // ====================== Profiling ====================== //
+        
+        //var_dump($options);die();
+        // ====================== OPTIONS MEETS TEMPLATE ====================== //
+        // Load portal view with options we've setted
+        $this->load->view('index', $options);
+        // ====================== OPTIONS MEETS TEMPLATE ====================== //        
     }
 
     /**
