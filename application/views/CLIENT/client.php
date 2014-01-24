@@ -106,18 +106,18 @@
                 <h4 class="modal-title">Edit profile</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal form-channel" action="/profile/edit" method="POST" role="form">
+                <form class="form-horizontal form-channel" enctype="multipart/form-data" action="/profile/edit" method="POST" role="form">
                     <label>Upload Avatar</label>
                     <div class="form-group">
                         <div class="col-sm-10">
-                            <input type="channel" name="channel" class="form-control" id="avatar" placeholder="Path...">
+                            <input type="file" name="avatarPicUnique" class="btn btn-success form-control" id="avatar" placeholder="Path...">
                         </div>
                     </div> 
 
                     <label>Bio</label>
                     <div class="form-group">
                         <div class="col-sm-10">
-                            <textarea id="bio" class="form-control" rows="3"></textarea>
+                            <input type="text" id="bio" class="form-control" name="Bio">
                         </div>
                     </div> 
                     <button type="submit" name="join" class="btn btn-default">Save changes</button>

@@ -121,7 +121,7 @@ $(document).ready(function() {
                     
                     // Avatar
                     if(!!data.avatar) {
-                        $('.setcard_picture').html('<img class="setcartd_picture_src img-circle" src="' + window.location.href + data.avatar + '"/>');
+                        $('.setcard_picture').html('<img class="setcartd_picture_src img-circle" src="avatar/?user=' + userClick.html() + '"/>');
                     }                    
                 }
             });

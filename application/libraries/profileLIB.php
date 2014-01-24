@@ -102,4 +102,78 @@ class profileLIB {
         }
     }
 
+    /**
+     * Edit your profile
+     */
+    public function edit() {
+
+        $session = $this->ci->session->all_userdata();
+        $userName = strtolower(htmlspecialchars($session['username']));
+        $userID = $session['id'];
+
+        // Update bio if given
+        if (!empty($_POST['Bio'])) {
+            $cleanBio = htmlspecialchars($_POST['Bio']);
+            $this->ci->db->query("UPDATE profiles SET `bio` = '{$cleanBio}' WHERE userID = {$userID}");
+        }
+
+        // Avatar
+        if (!empty($_FILES)) {
+            $config = $this->ci->globalconfig->getConfig();
+            $configPic = $config['profilePictures'];
+
+            // Get image extension
+            $infos = pathinfo($_FILES['avatarPicUnique']['name']);
+
+            // Save to
+            $hashedName = $this->getHashedName($userName);
+            $file = $configPic['profilePicturesPATH'] . '/' . basename($hashedName) . '.' . $infos['extension'];
+      
+            // Invalid extension
+            if (!in_array($infos['extension'], $configPic['allowedPictureExtension'])) {
+                //return array('status' => 'failure', 'message' => 'Invalid extension.');
+            }
+
+            // Get filesize
+            $fileSize = filesize($_FILES['avatarPicUnique']['tmp_name']);
+
+            // Invalid filesize
+            if ($fileSize > $configPic['allowedPictureSize'] && $configPic['allowedPictureSize'] != -1) {
+                //return array('status' => 'failure', 'message' => 'Image is too large.');
+            }
+
+            // Move file
+            if (move_uploaded_file($_FILES['avatarPicUnique']['tmp_name'], $file)) {
+                //return array('status' => 'success', 'message' => 'Successfully uploaded.');
+                $temp = basename($hashedName) . '.' . $infos['extension'];
+                $this->ci->db->query("UPDATE profiles SET `avatar` = 'profilePic/{$temp}' WHERE userID = {$userID}");
+            } else {
+                //return array('status' => 'failure', 'message' => 'Whatever - something went wrong. Great.');
+            }
+        }
+        $this->ci->load->helper('url');
+        redirect('/', 'refresh'); // Attention, HTTPS LAYER!
+        return true;
+    }
+
+    /**
+     * Hash Username, return safe
+     * @param type $name
+     * @return boolean
+     */
+    private function getHashedName($name = null) {
+        // If empty name, nothing to hash
+        if (empty($name) || strlen($name) <= 0) {
+            return false;
+        }
+
+        // Salt. Psst!!!
+        $salt = "@oLfmæł€kgi0";
+        // Hash it
+        $newName = hash('sha256', $salt . $name);
+
+        // Return hashed name
+        return $newName;
+    }
+
 }
