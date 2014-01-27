@@ -38,8 +38,14 @@ class messageLIB {
 
         // Make input sql friendly
         $channel = htmlspecialchars($channel);
+        
+        // Ignore system
+        if(strtolower($channel) == 'system') {
+            return;
+        }
+        
         $message = htmlspecialchars($message);
-        $message = preg_replace('!(http://[a-z0-9_./?=&-]+)!i', '<a href="?out=$1" target="_blank">$1</a> ', $message." ");
+        $message = preg_replace('!(http://[a-z0-9_./?=&-]+)!i', '<a href="?out=$1" target="_blank">$1</a> ', $message . "");
         // Get userID
         if (empty($userID)) {
             $userID = $this->ci->session->userdata('id') ? $this->ci->session->userdata('id') : 0;
@@ -54,8 +60,31 @@ class messageLIB {
             return;
         }
 
+        // Check users message 
+        $userReturn = $this->checkCommand($message);
+        
+        // If return is not emtpy, return Command return.. 
+        if (!empty($userReturn)) {
+            // If Ajax Request, return json format
+            if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == "XMLHttpRequest") {
+                $json = true;
+            }
+
+            // Return all the messages in json?
+            if (!empty($json)) {
+                echo json_encode($userReturn);
+                die();
+            }
+
+            // Return all the messages
+            return $userReturn;
+        }
+
         // Create Message
         $createMessage = $this->ci->db->query("INSERT INTO `messages` (userID,channelID,message,timestamp) VALUES ('{$userID}', '{$channelID}', '{$message}', NOW())");
+        
+        // Return status
+        return $createMessage;
     }
 
     /**
@@ -66,11 +95,6 @@ class messageLIB {
     public function recive($channel = null, $json = null, $reverse = null) {
         // If empty channel, return
         if (empty($channel)) {
-            // Dirty hack, i know..
-            // $serverTempName = (int) str_replace('/message/recive/', '', $_SERVER['REQUEST_URI']); | Will change this
-
-            // Set default channel
-            //$channel = $serverTempName ? $serverTempName : "default";
             $channel = 'default';
         }
 
@@ -144,4 +168,42 @@ class messageLIB {
         return $messageContainer;
     }
 
+    /**
+     * Return command
+     * @param type $message
+     * @return boolean|string
+     */
+    private function checkCommand($message = null) {
+        
+        // Check if message match command syntax or is empty
+        if(empty($message) || $message[0] != '/') {
+            return false;
+        }
+        
+        // Match command
+        switch($message)
+        {
+            // Private commands, not visible for all users
+            case '/help':
+                $returnMessage = array('message' => 'HELP:');
+                break;
+            default:
+                $returnMessage = array('message' => "Command $message not found. Please type /help for command overview.");
+                break;
+        }
+        
+        // If return message is filled
+        if(!empty($returnMessage)) {
+            // Timestamps for all
+            $objDateTime = new DateTime('NOW');
+            // Add timestamp
+            $returnMessage['timestamp'] = $objDateTime->format('Y-m-d H:i:s');
+            
+            // Return 
+            return $returnMessage;
+        }
+        
+        // Return false, but this point should never given
+        return false;
+    }
 }

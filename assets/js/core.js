@@ -27,13 +27,32 @@ $(document).ready(function() {
                 dataType: "JSON",
                 type: "POST",
                 success: function(data) {
-
+                    if (typeof data.message != "undefined") {
+                        privateMessageSystem(data);
+                    }
                 }
             });
 
             $('.message').val('');
         }
     });
+
+    // New array for some nice internal messages
+    var internalMessage = new Array();
+
+    // Add a message into internal array
+    function privateMessageSystem(messageAdd) {
+        console.log(messageAdd.message);
+        if (typeof internalMessage.length == "undefined") {
+            countBean = 0;
+        } else {
+            countBean = internalMessage.length;
+        }
+
+        internalMessage[countBean] = {};
+        internalMessage[countBean].message = messageAdd.message;
+        internalMessage[countBean].timestamp = messageAdd.timestamp;
+    }
 
     // Change channels by strike arrow keys - currently maybe a little bit dirty
     $(document).keyup(function(e) {
@@ -70,6 +89,12 @@ $(document).ready(function() {
                     $.each(messages, function(messageNum, messageArr) {
                         $(currentChatTab).append("[" + messageArr.timestamp + "]  <a  data-toggle='modal' data-target='#setcard' class='user chatUser level" + messageArr.level + "'>" + messageArr.username + "</a>: " + messageArr.message + "<br/>");
                     });
+
+                    // Create new log foreach message
+                    $.each(internalMessage, function(messageIntNum, messageIntArr) {
+                        $('#system').append("[" + messageIntArr.timestamp + "] <a class='user chatUser level99'>SYSTEM</a>: " + messageIntArr.message + "<br/>");
+                    });
+                    
                     $(".contentChat").scrollTop($('.contentChat')[0].scrollHeight);
                 });
                 regHooks();
@@ -94,35 +119,35 @@ $(document).ready(function() {
                     // Render data in modal
 
                     // Check, if user not found
-                    if(data.message) {
+                    if (data.message) {
                         $('.setcard_name').html(data.message);
                         $('.setcard_born').html('');
                         $('.setcard_bio').html('');
                         $('.setcard_picture').html('<img class="setcartd_picture_src img-circle" src="' + window.location.href + 'profilePic/default.png"/>');
                         return;
                     }
-                    
+
                     // Realname
                     if (!!data.realName) {
                         $('.setcard_name').html(data.realName + ' alias "' + userClick.html() + '"');
                     } else {
                         $('.setcard_name').html(userClick.html());
                     }
-                    
+
                     // Birthdate
-                    if(data.birthdate != '0000-00-00') {
+                    if (data.birthdate != '0000-00-00') {
                         $('.setcard_born').html('Born in: ' + data.birthdate);
                     }
-                    
+
                     // Bio
                     if (!!data.bio) {
                         $('.setcard_bio').html(data.bio);
                     }
-                    
+
                     // Avatar
-                    if(!!data.avatar) {
+                    if (!!data.avatar) {
                         $('.setcard_picture').html('<img class="setcartd_picture_src img-circle" src="avatar/?user=' + userClick.html() + '"/>');
-                    }                    
+                    }
                 }
             });
         });
@@ -139,15 +164,15 @@ $(document).ready(function() {
     // Helpcenter
     $('.bottomBar').click(function() {
         var height = $('.bottomBar').css('height');
-        if(height === "24px") {
+        if (height === "24px") {
             // Expand
-            $('.bottomBar').animate({ height: 240 }, 600);
+            $('.bottomBar').animate({height: 240}, 600);
         } else {
             // Small Version
-            $('.bottomBar').animate({ height: 24 }, 600);
+            $('.bottomBar').animate({height: 24}, 600);
         }
     });
-    
+
     // Hide helpcenter
     $('.hideHelpcenter').click(function() {
         $('.bottomBar').fadeOut();
