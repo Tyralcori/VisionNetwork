@@ -2,12 +2,12 @@
 <div class="client">
     <div class="naviChoose">
         <ul class="nav nav-tabs">
-            <li>
+            <li class="tab_system">
                 <a href="#system" data-toggle="tab" class="channelTabs" id="0">SYSTEM</a>
             </li>
             {assign var=zaehler value=1}
             {foreach name=name item=item from=$userSession.currentChannels}
-            <li {if $zaehler == 0}class="active"{/if}>
+            <li {if $zaehler == 0}class="active"{/if} class="tab_{$item.name}">
                 <a href="#{$item.name}" data-toggle="tab" class="channelTabs" id="{$zaehler}">{$item.name}</a>
             </li>
             {assign var=zaehler value=$zaehler+1}
@@ -38,7 +38,7 @@
             {/foreach}
             <div class="tab-pane" id="system">
                 <div class="bottomChannel">
-                    <div class="contentChat chat_{$item.name}" style="width:100%;text-align:center;">
+                    <div class="contentChat chat_{$item.name}" style="width:100%;height:100%;">
                         <pre style="min-width:1000px;text-align:center;">
          _________ _______ _________ _______  _            _        _______ _________          _______  _______  _       
 |\     /|\__   __/(  ____ \\__   __/(  ___  )( (    /|    ( (    /|(  ____ \\__   __/|\     /|(  ___  )(  ____ )| \    /\
@@ -54,14 +54,16 @@ All rights reserved
 
 Thanks for using Vision Network V {$version}
                         </pre>
+                        <div class="systemLogChat">
                         {foreach name=name item=logLine from=$item.log}
-                        [{$logLine.timestamp}] <a data-toggle="modal" data-target="#setcard" class="user chatUser level{$logLine.level}">{$logLine.username}</a>: {$logLine.message}<br/>
-                        {/foreach}                        
+                        [{$logLine.timestamp}] {$logLine.username}: {$logLine.message}<br/>
+                        {/foreach}    
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="input messageInput">
-                <input type="message" class="form-control message" id="message" placeholder="Type /help for command overview..">
+                <input type="message" class="form-control message" id="message" placeholder="Type /help for command overview.." style="display:none;">
             </div>
         </div>
     </div>

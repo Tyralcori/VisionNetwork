@@ -7,6 +7,15 @@ $(document).ready(function() {
         $('.channelTabs')[0].click();
     }
 
+    // Show messagebox on every tab excluding system tab
+    $('.channelTabs').click(function() {
+        $('.message').css('display', 'block');
+    });
+    // No inputbox (message) on system channel
+    $('.tab_system').click(function() {
+        $('.message').css('display', 'none');
+    });
+
     if (typeof $('.channelTabs')[0] != "undefined") {
         // Message refresh
         refreshLogs();
@@ -42,7 +51,6 @@ $(document).ready(function() {
 
     // Add a message into internal array
     function privateMessageSystem(messageAdd) {
-        console.log(messageAdd.message);
         if (typeof internalMessage.length == "undefined") {
             countBean = 0;
         } else {
@@ -52,6 +60,24 @@ $(document).ready(function() {
         internalMessage[countBean] = {};
         internalMessage[countBean].message = messageAdd.message;
         internalMessage[countBean].timestamp = messageAdd.timestamp;
+
+        // Create new log foreach message
+        $('.systemLogChat').append("[" + messageAdd.timestamp + "] SYSTEM: " + messageAdd.message + "<br/>");
+        highlight('system');
+    }
+
+    // Highlight a channel
+    function highlight(channel) {
+        if (channel.length > 0) {
+            var prefix = "tab_";
+            var completeChannel = prefix + channel;
+            // Add highlightChannel class for channel
+            $('.' + completeChannel + ' > .channelTabs').addClass('highlightChannel');
+            // Remove highlight onclick highlighted channel
+            $('.highlightChannel').click(function() {
+                $(this).removeClass('highlightChannel');
+            });
+        }
     }
 
     // Change channels by strike arrow keys - currently maybe a little bit dirty
@@ -90,11 +116,6 @@ $(document).ready(function() {
                         $(currentChatTab).append("[" + messageArr.timestamp + "]  <a  data-toggle='modal' data-target='#setcard' class='user chatUser level" + messageArr.level + "'>" + messageArr.username + "</a>: " + messageArr.message + "<br/>");
                     });
 
-                    // Create new log foreach message
-                    $.each(internalMessage, function(messageIntNum, messageIntArr) {
-                        $('#system').append("[" + messageIntArr.timestamp + "] <a class='user chatUser level99'>SYSTEM</a>: " + messageIntArr.message + "<br/>");
-                    });
-                    
                     $(".contentChat").scrollTop($('.contentChat')[0].scrollHeight);
                 });
                 regHooks();

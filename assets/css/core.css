@@ -196,6 +196,11 @@
     top:95%;
     width:100%;
 }
+
+.highlightChannel {
+    color:darkred;
+    font-weight:bold;
+}
 /* CHANNEL CLIENT */
 
 /* NEW FRONTEND */
