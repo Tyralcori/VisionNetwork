@@ -116,12 +116,12 @@ class redboxLIB {
             // timeload
             'timeLoad' => array(
                 'week' => array(
-                    'AVG' => "SELECT AVG(timeLoad) as week_AVG_timeload FROM redbox WHERE time BETWEEN '{$from}%' AND '{$to}%'",
+                    'AVG' => "SELECT AVG(timeLoad) as timeLoad FROM redbox WHERE time BETWEEN '{$from}%' AND '{$to}%'",
                     'LOWEST' => "SELECT (timeLoad) FROM redbox WHERE time BETWEEN '{$from}%' AND '{$to}%' ORDER BY timeLoad ASC LIMIT 1",
                     'HIGHEST' => "SELECT (timeLoad) FROM redbox WHERE time BETWEEN '{$from}%' AND '{$to}%' ORDER BY timeLoad DESC LIMIT 1",
                 ),
                 'all' => array(
-                    'AVG' => "SELECT AVG(timeLoad) as week_AVG_timeload FROM redbox",
+                    'AVG' => "SELECT AVG(timeLoad) as timeLoad FROM redbox",
                     'LOWEST' => "SELECT (timeLoad) FROM redbox ORDER BY timeLoad ASC LIMIT 1",
                     'HIGHEST' => "SELECT (timeLoad) FROM redbox ORDER BY timeLoad DESC LIMIT 1",
                 ),
@@ -129,34 +129,34 @@ class redboxLIB {
             // User visits
             'userVisits' => array(
                 'week' => array(
-                    'byUser' => "SELECT COUNT(DISTINCT user) FROM redbox WHERE time BETWEEN '{$from}%' AND '{$to}%'",
-                    'byIP' => "SELECT COUNT(DISTINCT ip) FROM redbox WHERE time BETWEEN '{$from}%' AND '{$to}%'",
+                    'byUser' => "SELECT COUNT(DISTINCT user) as count FROM redbox WHERE time BETWEEN '{$from}%' AND '{$to}%'",
+                    'byIP' => "SELECT COUNT(DISTINCT ip) as count FROM redbox WHERE time BETWEEN '{$from}%' AND '{$to}%'",
                 ),
                 'all' => array(
-                    'byUser' => "SELECT COUNT(DISTINCT user) FROM redbox",
-                    'byIP' => "SELECT COUNT(DISTINCT ip) FROM redbox",
+                    'byUser' => "SELECT COUNT(DISTINCT user) as count FROM redbox",
+                    'byIP' => "SELECT COUNT(DISTINCT ip) as count FROM redbox",
                 ),
             ),
             // Popular Sites
             'sites' => array(
                 'week' => array(
-                    'LOWEST' => "SELECT site, COUNT(site) FROM redbox WHERE time BETWEEN '{$from}%' AND '{$to}%' GROUP BY site ORDER BY COUNT(site) ASC;",
-                    'HIGHEST' => "SELECT site, COUNT(site) FROM redbox WHERE time BETWEEN '{$from}%' AND '{$to}%' GROUP BY site ORDER BY COUNT(site) DESC;",
+                    'LOWEST' => "SELECT site, COUNT(site) as count FROM redbox WHERE time BETWEEN '{$from}%' AND '{$to}%' GROUP BY site ORDER BY COUNT(site) ASC;",
+                    'HIGHEST' => "SELECT site, COUNT(site) as count FROM redbox WHERE time BETWEEN '{$from}%' AND '{$to}%' GROUP BY site ORDER BY COUNT(site) DESC;",
                 ),
                 'all' => array(
-                    'LOWEST' => "SELECT site, COUNT(site) FROM redbox GROUP BY site ORDER BY COUNT(site) ASC;",
-                    'HIGHEST' => "SELECT site, COUNT(site) FROM redbox GROUP BY site ORDER BY COUNT(site) DESC;",
+                    'LOWEST' => "SELECT site, COUNT(site) as count FROM redbox GROUP BY site ORDER BY COUNT(site) ASC;",
+                    'HIGHEST' => "SELECT site, COUNT(site) as count FROM redbox GROUP BY site ORDER BY COUNT(site) DESC;",
                 ),
             ),
             // User Agents
             'userAgent' => array(
                 'week' => array(
-                    'LOWEST' => "SELECT userAgent, COUNT(userAgent) FROM redbox  WHERE time BETWEEN '{$from}%' AND '{$to}%' GROUP BY userAgent ORDER BY COUNT(userAgent) ASC;",
-                    'HIGHEST' => "SELECT userAgent, COUNT(userAgent) FROM redbox  WHERE time BETWEEN '{$from}%' AND '{$to}%' GROUP BY userAgent ORDER BY COUNT(userAgent) DESC;",
+                    'LOWEST' => "SELECT userAgent, COUNT(userAgent) as count FROM redbox  WHERE time BETWEEN '{$from}%' AND '{$to}%' GROUP BY userAgent ORDER BY COUNT(userAgent) ASC;",
+                    'HIGHEST' => "SELECT userAgent, COUNT(userAgent) as count FROM redbox  WHERE time BETWEEN '{$from}%' AND '{$to}%' GROUP BY userAgent ORDER BY COUNT(userAgent) DESC;",
                 ),
                 'all' => array(
-                    'LOWEST' => "SELECT userAgent, COUNT(userAgent) FROM redbox GROUP BY userAgent ORDER BY COUNT(userAgent) ASC;",
-                    'HIGHEST' => "SELECT userAgent, COUNT(userAgent) FROM redbox GROUP BY userAgent ORDER BY COUNT(userAgent) DESC;",
+                    'LOWEST' => "SELECT userAgent, COUNT(userAgent) as count FROM redbox GROUP BY userAgent ORDER BY COUNT(userAgent) ASC;",
+                    'HIGHEST' => "SELECT userAgent, COUNT(userAgent) as count FROM redbox GROUP BY userAgent ORDER BY COUNT(userAgent) DESC;",
                 ),
             ),
         );
