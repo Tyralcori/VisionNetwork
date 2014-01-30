@@ -183,21 +183,86 @@ class messageLIB {
             return false;
         }
 
+        // Try to explode this
+        $explodeLimitMessage = explode(" ", $message);
+
         // Match command
-        switch ($message) {
+        switch ($explodeLimitMessage[0]) {
             // Private commands, not visible for all users
             case '/help':
-                $returnMessage = array('message' => 'HELP:');
+                $returnMessage = array('message' => '
+<pre>
+<h4>HELP:</h4>
+<label>[Channel commands]</label>
+/join CHANNELNAME - join a channel
+/leave CHANNELNAME - leave a channel (You can type /leave for leaving current channel)
+/nextFeatues - list next version features
+</pre>');
+                break;
+            case '/nextFeatures':
+                $returnMessage = array('message' => '
+<pre>
+<h4>Next features (0.6.0):</h4>
+<label>Interfaces</label>
+Twitter & Facebook API connection for post / get
+
+<label>Channel handling</label>
+Ignore, kick, ban user
+Write in some nice colors (colorpicker?)
+Channelsettings (How many slots allowed, Link posting, etc. for channel owner)
+
+<label>Redbox</label>
+API for import & export stats?
+
+<label>Bots</label>
+Channelbots for creating games (Quizbot, e.g.)
+
+So many new features planned...
+You have ideas to improve VisionNetwork? Write me!
+a.czichelski@elitecoder.eu
+</pre>');
                 break;
             case '/leave':
+                // Overwrite current channel, if given
+                if(!empty($explodeLimitMessage[1])) {
+                    $channel = $explodeLimitMessage[1];
+                }
+                
+                // Call command leave
                 $returningFunction = $commandLIB->leave($channel);
+                
+                // Create returning message
                 $returningFunctionMessage = "Can't left channel $channel";
                 if($returningFunction == true) {
                     $returningFunctionMessage = "Left channel $channel";
                 }
+                
+                // Return message
+                $returnMessage = array('message' => $returningFunctionMessage);
+                break;
+            case '/join':
+                // Set default channel
+                $channel = "default";
+                
+                // Overwrite default channel, if given
+                if(!empty($explodeLimitMessage[1])) {
+                    $channel = $explodeLimitMessage[1];
+                }
+                
+                // Call command join
+                $returningFunction = $commandLIB->join($channel);
+                
+                // Create returning message
+                $returningFunctionMessage = "Can't join channel $channel";
+                if($returningFunction == true) {
+                    $returningFunctionMessage = "Joined channel $channel";
+                }
+                
+                // Return message
                 $returnMessage = array('message' => $returningFunctionMessage);
                 break;
             default:
+                // Whoops, something wrong?
                 $returnMessage = array('message' => "Command $message not found. Please type /help for command overview.");
                 break;
         }
