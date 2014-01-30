@@ -188,7 +188,7 @@ class messageLIB {
 
         // Match command
         switch ($explodeLimitMessage[0]) {
-            // Private commands, not visible for all users
+            // =========================== PRIVATE COMMANDS =========================== //
             case '/help':
                 $returnMessage = array('message' => '
 <pre>
@@ -261,10 +261,29 @@ a.czichelski@elitecoder.eu
                 // Return message
                 $returnMessage = array('message' => $returningFunctionMessage);
                 break;
+            case '/ignore':
+                break;
+            // =========================== PRIVATE COMMANDS END =========================== //
+
+                
+            // =========================== CHANNEL OWNER COMMANDS =========================== //
+            case '/kick':
+                break;
+            case '/ban':
+                break;
+            case '/voice':
+                break;
+            case '/devoice':
+                break;
+            // =========================== CHANNEL OWNER COMMANDS END =========================== //
+           
+            
+            // =========================== MISC =========================== //
             default:
                 // Whoops, something wrong?
                 $returnMessage = array('message' => "Command $message not found. Please type /help for command overview.");
                 break;
+            // =========================== MISC END=========================== //
         }
 
         // If return message is filled
