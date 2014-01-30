@@ -116,9 +116,9 @@ $(document).ready(function() {
                         $(currentChatTab).append("[" + messageArr.timestamp + "]  <a  data-toggle='modal' data-target='#setcard' class='user chatUser level" + messageArr.level + "'>" + messageArr.username + "</a>: " + messageArr.message + "<br/>");
                     });
                     
-                    $(".contentChat").each(function() {
-                        var bottomHeight = $(this).height();
-                        $(".contentChat").scrollTop(bottomHeight);
+                    $(".contentChat").each(function(key,value) {
+                        var bottomHeight = $(".contentChat")[key].scrollHeight;
+                        $(this).scrollTop(bottomHeight);
                     });
                 });
                 regHooks();
