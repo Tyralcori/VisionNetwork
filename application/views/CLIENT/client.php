@@ -57,6 +57,9 @@ All rights reserved
 
 Thanks for using Vision Network V {$version}
                         </pre>
+                        <div class="systemLogChat">
+
+                        </div>
                     </div>
                 </div>
             </div>
