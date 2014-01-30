@@ -41,7 +41,7 @@
             {/foreach}
             <div class="tab-pane" id="system">
                 <div class="bottomChannel">
-                    <div class="contentChat chat_{$item.name}" style="width:100%;height:100%;">
+                    <div class="contentChat chat_system" style="width:100%;height:100%;">
                         <pre style="min-width:1000px;text-align:center;">
          _________ _______ _________ _______  _            _        _______ _________          _______  _______  _       
 |\     /|\__   __/(  ____ \\__   __/(  ___  )( (    /|    ( (    /|(  ____ \\__   __/|\     /|(  ___  )(  ____ )| \    /\
@@ -57,11 +57,6 @@ All rights reserved
 
 Thanks for using Vision Network V {$version}
                         </pre>
-                        <div class="systemLogChat">
-                            {foreach name=name item=logLine from=$item.log}
-                            [{$logLine.timestamp}] {$logLine.username}: {$logLine.message}<br/>
-                            {/foreach}    
-                        </div>
                     </div>
                 </div>
             </div>
