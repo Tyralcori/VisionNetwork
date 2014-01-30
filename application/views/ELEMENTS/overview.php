@@ -1,3 +1,6 @@
+{if !empty($channel.join.state) AND $channel.join.state eq 'FULL'}
+    {include "CLIENT/full.php"}
+{/if}
 <div class="channelChooser">
     <form class="form-horizontal form-channel" action="/channel/join" method="POST" role="form">
         <label>Enter a channel</label>

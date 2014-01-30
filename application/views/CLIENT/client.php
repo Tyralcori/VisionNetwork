@@ -1,3 +1,6 @@
+{if isset($userSession.banned) AND $userSession.banned}
+    {include "ELEMENTS/banned.php"}
+{else}
 <!-- CLIENT START //-->
 <div class="client">
     <div class="naviChoose">
@@ -55,9 +58,9 @@ All rights reserved
 Thanks for using Vision Network V {$version}
                         </pre>
                         <div class="systemLogChat">
-                        {foreach name=name item=logLine from=$item.log}
-                        [{$logLine.timestamp}] {$logLine.username}: {$logLine.message}<br/>
-                        {/foreach}    
+                            {foreach name=name item=logLine from=$item.log}
+                            [{$logLine.timestamp}] {$logLine.username}: {$logLine.message}<br/>
+                            {/foreach}    
                         </div>
                     </div>
                 </div>
@@ -208,3 +211,4 @@ Thanks for using Vision Network V {$version}
     </div>
 </div>
 <!-- TOPIC EDIT END //-->
+{/if}

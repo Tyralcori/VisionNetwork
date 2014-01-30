@@ -118,7 +118,7 @@ class profileLIB {
         }
 
         // Avatar
-        if (!empty($_FILES)) {
+        if (!empty($_FILES) && !empty($_FILES['avatarPicUnique']['name'])) {
             $config = $this->ci->globalconfig->getConfig();
             $configPic = $config['profilePictures'];
 
@@ -128,7 +128,7 @@ class profileLIB {
             // Save to
             $hashedName = $this->getHashedName($userName);
             $file = $configPic['profilePicturesPATH'] . '/' . basename($hashedName) . '.' . $infos['extension'];
-      
+
             // Invalid extension
             if (!in_array($infos['extension'], $configPic['allowedPictureExtension'])) {
                 //return array('status' => 'failure', 'message' => 'Invalid extension.');

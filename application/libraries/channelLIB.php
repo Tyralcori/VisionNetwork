@@ -81,9 +81,6 @@ class channelLIB {
             // Load helper for redirect
             $this->ci->load->helper('url');
             redirect('/', 'refresh'); // Attention, HTTPS LAYER!            
-        } else {
-            // Insert connection
-            $createConnection = $this->setConnection($getChannelIDQuery, $userID);
         }
 
         // Check already connected
@@ -105,7 +102,7 @@ class channelLIB {
         $permission = $this->getPermission($getChannelIDQuery, $userID);
 
         // Joining normal channel
-        if ($limitJoinLevelByChannel == 1) {
+        if ($limitJoinLevelByChannel == 1 || $channelName == 'default') {
             // If $limitConnectionsByChannel not -1 (unlimited) proof max allowed connections
             if ($limitConnectionsByChannel != -1) {
                 // Is Channel full? | Master (Permission = 99) can always join
@@ -116,6 +113,11 @@ class channelLIB {
             }
         }
 
+        // Channel is not full, join
+        // Insert connection
+        $createConnection = $this->setConnection($getChannelIDQuery, $userID);
+        
+        // Get infos
         $channelInfos = $this->getChannelInformations($getChannelIDQuery);
 
         // Add channel in session

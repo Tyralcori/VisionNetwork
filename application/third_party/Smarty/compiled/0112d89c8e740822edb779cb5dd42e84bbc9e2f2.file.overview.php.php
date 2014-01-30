@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2014-01-15 15:41:24
+<?php /* Smarty version Smarty-3.1.13, created on 2014-01-30 08:45:30
          compiled from "application/views/ELEMENTS/overview.php" */ ?>
 <?php /*%%SmartyHeaderCode:101005121052d69e14d323e7-97141238%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '0112d89c8e740822edb779cb5dd42e84bbc9e2f2' => 
     array (
       0 => 'application/views/ELEMENTS/overview.php',
-      1 => 1388745359,
+      1 => 1391067928,
       2 => 'file',
     ),
   ),
@@ -15,11 +15,19 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
-  'has_nocache_code' => false,
   'version' => 'Smarty-3.1.13',
   'unifunc' => 'content_52d69e14d35768_30525282',
+  'variables' => 
+  array (
+    'channel' => 0,
+  ),
+  'has_nocache_code' => false,
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_52d69e14d35768_30525282')) {function content_52d69e14d35768_30525282($_smarty_tpl) {?><div class="channelChooser">
+<?php if ($_valid && !is_callable('content_52d69e14d35768_30525282')) {function content_52d69e14d35768_30525282($_smarty_tpl) {?><?php if (!empty($_smarty_tpl->tpl_vars['channel']->value['join']['state'])&&$_smarty_tpl->tpl_vars['channel']->value['join']['state']=='FULL'){?>
+    <?php echo $_smarty_tpl->getSubTemplate ("CLIENT/full.php", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, null, null, array(), 0);?>
+
+<?php }?>
+<div class="channelChooser">
     <form class="form-horizontal form-channel" action="/channel/join" method="POST" role="form">
         <label>Enter a channel</label>
         <div class="form-group">
