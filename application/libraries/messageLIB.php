@@ -196,7 +196,7 @@ class messageLIB {
 <label>[Channel commands]</label>
 /join CHANNELNAME - join a channel
 /leave CHANNELNAME - leave a channel (You can type /leave for leaving current channel)
-/nextFeatues - list next version features
+/nextFeatures - list next version features
 </pre>');
                 break;
             case '/nextFeatures':
