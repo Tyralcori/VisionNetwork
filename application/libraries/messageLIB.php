@@ -38,12 +38,12 @@ class messageLIB {
 
         // Make input sql friendly
         $channel = htmlspecialchars($channel);
-        
+
         // Ignore system
-        if(strtolower($channel) == 'system') {
+        if (strtolower($channel) == 'system') {
             return;
         }
-        
+
         $message = htmlspecialchars($message);
         $message = preg_replace('!(http://[a-z0-9_./?=&-]+)!i', '<a href="?out=$1" target="_blank">$1</a> ', $message . "");
         // Get userID
@@ -61,8 +61,8 @@ class messageLIB {
         }
 
         // Check users message 
-        $userReturn = $this->checkCommand($message);
-        
+        $userReturn = $this->checkCommand($message, $channel);
+
         // If return is not emtpy, return Command return.. 
         if (!empty($userReturn)) {
             // If Ajax Request, return json format
@@ -82,7 +82,7 @@ class messageLIB {
 
         // Create Message
         $createMessage = $this->ci->db->query("INSERT INTO `messages` (userID,channelID,message,timestamp) VALUES ('{$userID}', '{$channelID}', '{$message}', NOW())");
-        
+
         // Return status
         return $createMessage;
     }
@@ -173,37 +173,48 @@ class messageLIB {
      * @param type $message
      * @return boolean|string
      */
-    private function checkCommand($message = null) {
-        
+    private function checkCommand($message = null, $channel = null) {
+        // Command LIB
+        require_once APPPATH . 'libraries/commandLIB.php';
+        $commandLIB = new commandLIB();
+
         // Check if message match command syntax or is empty
-        if(empty($message) || $message[0] != '/') {
+        if (empty($message) || $message[0] != '/') {
             return false;
         }
-        
+
         // Match command
-        switch($message)
-        {
+        switch ($message) {
             // Private commands, not visible for all users
             case '/help':
                 $returnMessage = array('message' => 'HELP:');
+                break;
+            case '/leave':
+                $returningFunction = $commandLIB->leave($channel);
+                $returningFunctionMessage = "Can't left channel $channel";
+                if($returningFunction == true) {
+                    $returningFunctionMessage = "Left channel $channel";
+                }
+                $returnMessage = array('message' => $returningFunctionMessage);
                 break;
             default:
                 $returnMessage = array('message' => "Command $message not found. Please type /help for command overview.");
                 break;
         }
-        
+
         // If return message is filled
-        if(!empty($returnMessage)) {
+        if (!empty($returnMessage)) {
             // Timestamps for all
             $objDateTime = new DateTime('NOW');
             // Add timestamp
             $returnMessage['timestamp'] = $objDateTime->format('Y-m-d H:i:s');
-            
+
             // Return 
             return $returnMessage;
         }
-        
+
         // Return false, but this point should never given
         return false;
     }
+
 }
