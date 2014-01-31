@@ -59,7 +59,20 @@ class messageLIB {
         if (empty($channelID)) {
             return;
         }
+        
+        // Channel LIB
+        require_once APPPATH . 'libraries/channelLIB.php';
+        $channelLIB = new channelLIB();
 
+        // Get channel permission
+        $permissionLevel = $channelLIB->getPermission($channelID, $userID);
+
+        // If permissionlevel lower than 1, return, you are maybe devoiced
+        if ($permissionLevel <= 0) {
+            echo json_encode(array('message' => "Can not write in $channel, you are devocied."));
+            die();
+        }
+        
         // Check users message 
         $userReturn = $this->checkCommand($message, $channel);
 
@@ -296,11 +309,51 @@ a.czichelski@elitecoder.eu
             case '/ban':
                 break;
             case '/voice':
+                // Get current user to kick
+                if (!empty($explodeLimitMessage[2])) {
+                    $user = $explodeLimitMessage[2];
+                }
+
+                // Get channel
+                if (!empty($explodeLimitMessage[1])) {
+                    $channel = $explodeLimitMessage[1];
+                }
+
+                // If one of these are empty, return message
+                if (empty($user) || empty($channel)) {
+                    $returnMessage = array('message' => "User and channel must be given for the command /kick");
+                } else {
+                    // Call command kick
+                    $returningFunction = $commandLIB->voice($user, $channel);
+
+                    // Return message
+                    $returnMessage = array('message' => $returningFunction);
+                }
                 break;
             case '/devoice':
+                // Get current user to kick
+                if (!empty($explodeLimitMessage[2])) {
+                    $user = $explodeLimitMessage[2];
+                }
+
+                // Get channel
+                if (!empty($explodeLimitMessage[1])) {
+                    $channel = $explodeLimitMessage[1];
+                }
+
+                // If one of these are empty, return message
+                if (empty($user) || empty($channel)) {
+                    $returnMessage = array('message' => "User and channel must be given for the command /kick");
+                } else {
+                    // Call command kick
+                    $returningFunction = $commandLIB->devoice($user, $channel);
+
+                    // Return message
+                    $returnMessage = array('message' => $returningFunction);
+                }
                 break;
             // =========================== MODERATOR COMMANDS END =========================== //
-           
+   
             
             // =========================== MISC =========================== //
             default:

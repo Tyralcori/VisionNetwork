@@ -188,7 +188,7 @@ class channelLIB {
         // Select Permission
         $selectPermission = $this->ci->db->query("SELECT `permissionLevel` FROM permissions WHERE userID = {$userID} AND channelID = {$channelID}")->row()->permissionLevel;
         // If emtpy permissions, insert default permission 1 - first join!
-        if (empty($selectPermission)) {
+        if (empty($selectPermission) && $selectPermission != "0") {
             $selectPermission = 1;
             $insertPermissionQuery = $this->setPermission($channelID, $userID, $selectPermission);
         }
@@ -208,11 +208,22 @@ class channelLIB {
             return;
         }
         // Default permission
-        if (empty($permission)) {
+        if (empty($permission) && $permission != "0") {
             $permission = 1;
         }
-        $insertPermissionQuery = $this->ci->db->query("INSERT INTO `permissions` (userID, channelID, permissionLevel) VALUES ({$userID},{$channelID},{$permission})");
-        return $insertPermissionQuery;
+        
+        // Check, if exists
+        $selectPermission = $this->ci->db->query("SELECT * FROM permissions WHERE userID = {$userID} AND channelID = {$channelID}");
+        
+        // If exits update, else insert
+        if($selectPermission->num_rows() > 0) {
+            $updatePermissionQuery = $this->ci->db->query("UPDATE permissions SET permissionLevel = {$permission} WHERE  userID = {$userID} AND channelID = {$channelID}");
+        } else {        
+            $insertPermissionQuery = $this->ci->db->query("INSERT INTO `permissions` (userID, channelID, permissionLevel) VALUES ({$userID},{$channelID},{$permission})");
+        }
+        
+        // Think, always success
+        return true;
     }
 
     /**
