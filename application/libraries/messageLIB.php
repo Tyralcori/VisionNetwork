@@ -213,8 +213,12 @@ class messageLIB {
 
 <label>[Moderator commands]</label>
 /kick CHANNELNAME USERNAME - kicks user out of channel
+
 /voice CHANNELNAME USERNAME - voice a user - allowed to write in channel
 /devoice CHANNELNAME USERNAME - devoice a user - not allowed to write in channel anymore
+
+/ban CHANNELNAME USERNAME - ban a user - not allowed to join anymore
+/unban CHANNELNAME USERNAME - unbans user - allows banned user to join
 </pre>');
                 break;
             case '/nextFeatures':
