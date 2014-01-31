@@ -213,7 +213,8 @@ class messageLIB {
 
 <label>[Moderator commands]</label>
 /kick CHANNELNAME USERNAME - kicks user out of channel
-
+/voice CHANNELNAME USERNAME - voice a user - allowed to write in channel
+/devoice CHANNELNAME USERNAME - devoice a user - not allowed to write in channel anymore
 </pre>');
                 break;
             case '/nextFeatures':
@@ -271,8 +272,10 @@ a.czichelski@elitecoder.eu
 
                 // Create returning message
                 $returningFunctionMessage = "Can't join channel $channel";
-                if ($returningFunction == true) {
+                if ($returningFunction == true && strlen($returningFunction) < 20) {
                     $returningFunctionMessage = "Joined channel $channel";
+                } else {
+                    $returningFunctionMessage = $returningFunction;
                 }
 
                 // Return message
@@ -285,7 +288,7 @@ a.czichelski@elitecoder.eu
             
             // =========================== MODERATOR COMMANDS =========================== //
             case '/kick':
-                // Get current user to kick
+                // Get current user 
                 if (!empty($explodeLimitMessage[2])) {
                     $user = $explodeLimitMessage[2];
                 }
@@ -307,9 +310,7 @@ a.czichelski@elitecoder.eu
                 }
                 break;
             case '/ban':
-                break;
-            case '/voice':
-                // Get current user to kick
+                // Get current user 
                 if (!empty($explodeLimitMessage[2])) {
                     $user = $explodeLimitMessage[2];
                 }
@@ -321,7 +322,30 @@ a.czichelski@elitecoder.eu
 
                 // If one of these are empty, return message
                 if (empty($user) || empty($channel)) {
-                    $returnMessage = array('message' => "User and channel must be given for the command /kick");
+                    $returnMessage = array('message' => "User and channel must be given for the command /ban");
+                } else {
+                    // Call command kick
+                    $returningFunction = $commandLIB->ban($user, $channel);
+
+                    // Return message
+                    $returnMessage = array('message' => $returningFunction);
+                }
+                break;
+            case '/unban':
+            case '/voice':
+                // Get current user
+                if (!empty($explodeLimitMessage[2])) {
+                    $user = $explodeLimitMessage[2];
+                }
+
+                // Get channel
+                if (!empty($explodeLimitMessage[1])) {
+                    $channel = $explodeLimitMessage[1];
+                }
+
+                // If one of these are empty, return message
+                if (empty($user) || empty($channel)) {
+                    $returnMessage = array('message' => "User and channel must be given for the command $explodeLimitMessage[1]");
                 } else {
                     // Call command kick
                     $returningFunction = $commandLIB->voice($user, $channel);
@@ -343,7 +367,7 @@ a.czichelski@elitecoder.eu
 
                 // If one of these are empty, return message
                 if (empty($user) || empty($channel)) {
-                    $returnMessage = array('message' => "User and channel must be given for the command /kick");
+                    $returnMessage = array('message' => "User and channel must be given for the command /devoice");
                 } else {
                     // Call command kick
                     $returningFunction = $commandLIB->devoice($user, $channel);

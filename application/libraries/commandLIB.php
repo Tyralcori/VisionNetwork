@@ -202,12 +202,12 @@ class commandLIB {
             if (empty($voiceUserID)) {
                 return $message;
             } else {
-                // Kick user out of channel
-                $kicked = $channelLIB->setPermission($channelID, $voiceUserID, 1);
+                // Voice user
+                $voice = $channelLIB->setPermission($channelID, $voiceUserID, 1);
 
                 // If success, modify message
-                if ($kicked == true) {
-                    $message = "$username voiced in channel $channel";
+                if ($voice == true) {
+                    $message = "$username recives permission to join and write in channel $channel";
                 }
             }
         }
@@ -272,12 +272,83 @@ class commandLIB {
             if (empty($devoiceUserID)) {
                 return $message;
             } else {
-                // Kick user out of channel
-                $kicked = $channelLIB->setPermission($channelID, $devoiceUserID, 0);
+                // Set permission to 0
+                $devoice = $channelLIB->setPermission($channelID, $devoiceUserID, 0);
 
                 // If success, modify message
-                if ($kicked == true) {
+                if ($devoice == true) {
                     $message = "$username devoiced in channel $channel";
+                }
+            }
+        }
+
+        // Return message
+        return $message;
+    }
+    
+    /**
+     * Ban user
+     * @param type $username
+     * @param type $channel
+     * @return boolean|string
+     */
+    public function ban($username = null, $channel = null) {
+        // If one of these are empty, return false
+        if (empty($username) || empty($channel)) {
+            return false;
+        }
+
+        // Channel LIB
+        require_once APPPATH . 'libraries/channelLIB.php';
+        $channelLIB = new channelLIB();
+
+        // Get channelID by Name
+        $channelID = $channelLIB->getChannelIDByName($channel);
+
+        // Must not be empty channelID
+        if (empty($channelID)) {
+            return "Cannel $channel does not exists";
+        }
+
+        // Get userID from session (user)
+        $session = $this->ci->session->all_userdata();
+        $userID = $session['id'];
+        // Global permission
+        $globalPermission = $session['globalPermission'];
+
+        // Must not be empty userid
+        if (empty($userID)) {
+            return "Invalid permission";
+        }
+
+        // Get permissionLevel by channelID, userID
+        $permissionLevel = $channelLIB->getPermission($channelID, $userID);
+
+        // Default message
+        $message = "Invalid permission";
+
+        // Check permission
+        if ($permissionLevel >= 99 || $globalPermission >= 99) {
+
+            // Channel LIB
+            require_once APPPATH . 'libraries/userLIB.php';
+            $userLIB = new userLIB();
+
+            // Get userID by username
+            $devoiceUserID = $userLIB->getUserIdByUserName($username);
+
+            $message = "Unknown user $username in $channel";
+            // if userid, kick
+            if (empty($devoiceUserID)) {
+                return $message;
+            } else {
+                // Ban user
+                // Set permission to -1, banned
+                $banned = $channelLIB->setPermission($channelID, $devoiceUserID, -1);
+
+                // If success, modify message
+                if ($banned == true) {
+                    $message = "$username banned in channel $channel";
                 }
             }
         }

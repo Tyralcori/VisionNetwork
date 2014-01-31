@@ -86,6 +86,15 @@ class channelLIB {
         // Check already connected
         $connected = $this->checkConnection($getChannelIDQuery, $userID);
         if ($connected) {
+            
+            // Check, if user is banned
+            $permission = $this->getPermission($getChannelIDQuery, $userID);
+            
+            // Banned
+            if($permission == "-1") {
+                return "Can not join channel $channelName. You are banned!";
+            }
+            
             $channelInfos = $this->getChannelInformations($getChannelIDQuery);
             return $channelInfos;
         }
@@ -160,7 +169,7 @@ class channelLIB {
         }
 
         // Query all users in channel
-        $nickListQuery = $this->ci->db->query("SELECT DISTINCT login.username, login.globalPermission FROM connections, login WHERE connections.userID = login.id AND connections.channelID = {$channelID}");
+        $nickListQuery = $this->ci->db->query("SELECT DISTINCT login.username, login.globalPermission FROM connections, login, permissions WHERE connections.userID = login.id AND connections.channelID = {$channelID} AND connections.userID = permissions.userID AND permissions.permissionLevel > 0 AND permissions.channelID = connections.channelID");
 
         // Nick List container
         $nickList = array();
@@ -518,7 +527,7 @@ class channelLIB {
         }
 
         // Get all connections
-        $selectAllChannels = $this->ci->db->query("SELECT DISTINCT `channelID` FROM connections WHERE userID = {$userID}");
+        $selectAllChannels = $this->ci->db->query("SELECT DISTINCT con.`channelID` FROM connections as con, permissions as per WHERE con.userID = {$userID} AND con.userID = per.userID AND per.permissionLevel > 0 AND con.channelID = per.channelID");
 
         // Connected Channels Container
         $connectedChannels = array();
