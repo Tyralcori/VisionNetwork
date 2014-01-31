@@ -241,5 +241,32 @@ class userLIB {
         }
         return;
     }
+    
+    /**
+     * Return userid by username
+     * @param type $username
+     * @return boolean
+     */
+    public function getUserIdByUserName ($username = null) {
+        // Must not be empty username
+        if(empty($username)) {
+            return false;
+        }
+        
+        // Select id by username  
+        $selectQuery = $this->ci->db->query("SELECT * FROM login WHERE username = '{$username}'");
+        
+        // If not empty, success
+        if ($selectQuery->num_rows() > 0) {
+            // Check userid
+            foreach ($selectQuery->result() as $key => $value) {
+                $userID = $value['id'] ? $value['id'] : 0;
+                return $userID;
+            }
+        }
+        
+        // May unknown user
+        return;
+    }
 
 }

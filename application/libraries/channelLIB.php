@@ -356,7 +356,7 @@ class channelLIB {
     public function killConnection($channelID = null, $userID = null) {
         // If empty channelID || empty userID
         if (empty($channelID) || empty($userID)) {
-            return;
+            return false;
         }
         // Kill connection
         $killedConnection = $this->ci->db->query("DELETE FROM connections WHERE userID = {$userID} AND channelID = {$channelID}");

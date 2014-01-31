@@ -197,6 +197,10 @@ class messageLIB {
 /join CHANNELNAME - join a channel
 /leave CHANNELNAME - leave a channel (You can type /leave for leaving current channel)
 /nextFeatures - list next version features
+
+<label>[Moderator commands]</label>
+/kick CHANNELNAME USERNAME - kicks user out of channel
+
 </pre>');
                 break;
             case '/nextFeatures':
@@ -224,50 +228,70 @@ a.czichelski@elitecoder.eu
                 break;
             case '/leave':
                 // Overwrite current channel, if given
-                if(!empty($explodeLimitMessage[1])) {
+                if (!empty($explodeLimitMessage[1])) {
                     $channel = $explodeLimitMessage[1];
                 }
-                
+
                 // Call command leave
                 $returningFunction = $commandLIB->leave($channel);
-                
+
                 // Create returning message
                 $returningFunctionMessage = "Can't left channel $channel";
-                if($returningFunction == true) {
+                if ($returningFunction == true) {
                     $returningFunctionMessage = "Left channel $channel";
                 }
-                
+
                 // Return message
                 $returnMessage = array('message' => $returningFunctionMessage);
                 break;
             case '/join':
                 // Set default channel
                 $channel = "default";
-                
+
                 // Overwrite default channel, if given
-                if(!empty($explodeLimitMessage[1])) {
+                if (!empty($explodeLimitMessage[1])) {
                     $channel = $explodeLimitMessage[1];
                 }
-                
+
                 // Call command join
                 $returningFunction = $commandLIB->join($channel);
-                
+
                 // Create returning message
                 $returningFunctionMessage = "Can't join channel $channel";
-                if($returningFunction == true) {
+                if ($returningFunction == true) {
                     $returningFunctionMessage = "Joined channel $channel";
                 }
-                
+
                 // Return message
                 $returnMessage = array('message' => $returningFunctionMessage);
                 break;
             case '/ignore':
                 break;
             // =========================== PRIVATE COMMANDS END =========================== //
-
-                
-            // =========================== CHANNEL OWNER COMMANDS =========================== //
+            
+            
+            // =========================== MODERATOR COMMANDS =========================== //
             case '/kick':
+                // Get current user to kick
+                if (!empty($explodeLimitMessage[2])) {
+                    $user = $explodeLimitMessage[2];
+                }
+
+                // Get channel
+                if (!empty($explodeLimitMessage[1])) {
+                    $channel = $explodeLimitMessage[1];
+                }
+
+                // If one of these are empty, return message
+                if (empty($user) || empty($channel)) {
+                    $returnMessage = array('message' => "User and channel must be given for the command /kick");
+                } else {
+                    // Call command kick
+                    $returningFunction = $commandLIB->kick($user, $channel);
+
+                    // Return message
+                    $returnMessage = array('message' => $returningFunction);
+                }
                 break;
             case '/ban':
                 break;
@@ -275,7 +299,7 @@ a.czichelski@elitecoder.eu
                 break;
             case '/devoice':
                 break;
-            // =========================== CHANNEL OWNER COMMANDS END =========================== //
+            // =========================== CMODERATOR COMMANDS END =========================== //
            
             
             // =========================== MISC =========================== //
