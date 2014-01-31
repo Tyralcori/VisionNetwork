@@ -116,7 +116,7 @@ class channelLIB {
         // Channel is not full, join
         // Insert connection
         $createConnection = $this->setConnection($getChannelIDQuery, $userID);
-        
+
         // Get infos
         $channelInfos = $this->getChannelInformations($getChannelIDQuery);
 
@@ -358,9 +358,15 @@ class channelLIB {
         if (empty($channelID) || empty($userID)) {
             return false;
         }
-        // Kill connection
-        $killedConnection = $this->ci->db->query("DELETE FROM connections WHERE userID = {$userID} AND channelID = {$channelID}");
-        return true;
+        // Check if connection exists
+        $selectConnection = $this->ci->db->query("SELECT * FROM connections WHERE userID = {$userID} AND channelID = {$channelID}");
+        
+        if ($selectConnection->num_rows() > 0) {
+            // Kill connection
+            $killedConnection = $this->ci->db->query("DELETE FROM connections WHERE userID = {$userID} AND channelID = {$channelID}");
+            return $killedConnection;
+        }
+        return false;
     }
 
     /**

@@ -299,7 +299,7 @@ a.czichelski@elitecoder.eu
                 break;
             case '/devoice':
                 break;
-            // =========================== CMODERATOR COMMANDS END =========================== //
+            // =========================== MODERATOR COMMANDS END =========================== //
            
             
             // =========================== MISC =========================== //

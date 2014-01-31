@@ -127,9 +127,10 @@ class commandLIB {
             // Get userID by username
             $kickUserID = $userLIB->getUserIdByUserName($username);
 
+            $message = "Unknown user $username in $channel";
             // if userid, kick
             if (empty($kickUserID)) {
-                return "Unknown user $username in $channel";
+                return $message;
             } else {
                 // Kick user out of channel
                 $kicked = $channelLIB->killConnection($channelID, $kickUserID);

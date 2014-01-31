@@ -254,15 +254,11 @@ class userLIB {
         }
         
         // Select id by username  
-        $selectQuery = $this->ci->db->query("SELECT * FROM login WHERE username = '{$username}'");
+        $selectQuery = $this->ci->db->query("SELECT id FROM login WHERE username = '{$username}'")->row()->id;
         
         // If not empty, success
-        if ($selectQuery->num_rows() > 0) {
-            // Check userid
-            foreach ($selectQuery->result() as $key => $value) {
-                $userID = $value['id'] ? $value['id'] : 0;
-                return $userID;
-            }
+        if (!empty($selectQuery)) {
+            return $selectQuery;
         }
         
         // May unknown user
