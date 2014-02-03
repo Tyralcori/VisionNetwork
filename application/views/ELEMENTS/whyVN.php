@@ -9,30 +9,37 @@
         <div class="row">
             <div class="col-md-2 col-md-offset-2 text-center">
                 <div class="service-item">
-                    <i class="service-icon fa fa-rocket"></i>
-                    <h4>Spacecraft Repair</h4>
-                    <p>Did your navigation system shut down in the middle of that asteroid field? We can repair any dings and scrapes to your spacecraft!</p>
+                    <i class="service-icon fa fa-check"></i>
+                    <h4>Loyal and faithful service</h4>
+                    <p>Chat with your friends in a safe area! We will encode all your messages, and won't sell your private datas. Just enjoy your stay!</p>
                 </div>
             </div>
             <div class="col-md-2 text-center">
                 <div class="service-item">
-                    <i class="service-icon fa fa-magnet"></i>
-                    <h4>Problem Solving</h4>
-                    <p>Need to know how magnets work? Our problem solving solutions team can help you identify problems and conduct exploratory research.</p>
+                    <i class="service-icon fa fa-eye"></i>
+                    <h4>Open source</h4>
+                    <p>You are able to copy our code, and run your special own "Vision Network" - all things are open source to make sure, we hide nothing!</p>
                 </div>
             </div>
             <div class="col-md-2 text-center">
                 <div class="service-item">
-                    <i class="service-icon fa fa-shield"></i>
-                    <h4>Blacksmithing</h4>
-                    <p>Planning a time travel trip to the middle ages? Preserve the space time continuum by blending in with period accurate armor and weapons.</p>
+                    <i class="service-icon fa fa-thumbs-up"></i>
+                    <h4>A lot of features</h4>
+                    <p>Every week i integrate a lot of good tested features to make your stay easier as before.</p>
                 </div>
             </div>
             <div class="col-md-2 text-center">
                 <div class="service-item">
-                    <i class="service-icon fa fa-pencil"></i>
-                    <h4>Pencil Sharpening</h4>
-                    <p>We've been voted the best pencil sharpening service for 10 consecutive years. If you have a pencil that feels dull, we'll get it sharp!</p>
+                    <i class="service-icon fa fa-tasks"></i>
+                    <h4>Your wish is our task</h4>
+                    <p>Feel free to offer your wishes! May your wish is a brand new feature in next version!</p>
+                </div>
+            </div>
+            <div class="col-md-2 text-center">
+                <div class="service-item">
+                    <i class="service-icon fa fa-dollar"></i>
+                    <h4>All for free</h4>
+                    <p>No premium services! Enjoy everything - for free!</p>
                 </div>
             </div>
         </div>

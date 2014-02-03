@@ -14,6 +14,10 @@
 {include "ELEMENTS/newAccount.php"}
 <!-- New Account END -->
 
+<!-- Roadmap -->
+{include "ELEMENTS/roadmap.php"}
+<!-- Roadmap END -->
+
 <!-- WHY Vision Network -->
 {include "ELEMENTS/whyVN.php"}
 <!-- WHY Vision Network END -->
@@ -25,6 +29,10 @@
 <!-- Vision Network Team -->
 {include "ELEMENTS/team.php"}
 <!-- Vision Network Team END -->
+
+<!-- Download -->
+{include "ELEMENTS/download.php"}
+<!-- Download END -->
 
 <!-- Contact -->
 {include "ELEMENTS/contact.php"}

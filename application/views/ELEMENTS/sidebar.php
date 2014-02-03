@@ -5,9 +5,11 @@
         <li class="sidebar-brand"><a href="#top">Vision Network</a></li>
         <li><a href="#login">Login</a></li>
         <li><a href="#newAccount">New Account</a></li>
+        <li><a href="#roadmap">Roadmap</a></li>
         <li><a href="#why">Why Vision Network</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#team">Team</a></li>
+        <li><a href="#download">Download</a></li>
         <li><a href="#contact">Contact</a></li>
     </ul>
 </div>
