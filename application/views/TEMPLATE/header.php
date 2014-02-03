@@ -9,6 +9,7 @@
 
         <script type="text/javascript" src="http://{$assetsURL}/js/jquery.min.js"></script>
         <script type="text/javascript" src="http://{$assetsURL}/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="http://{$assetsURL}/js/countTo.js"></script>
         <script type="text/javascript" src="http://{$assetsURL}/js/core.js"></script>
     </head>
     <body>

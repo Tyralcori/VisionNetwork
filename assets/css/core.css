@@ -320,6 +320,38 @@
 .form-signin > label {
     color:#555;
 }
+
+.stats {
+    position:relative;
+    top:120px;
+    height:200px;
+    width:100%;
+    margin:auto auto;
+}
+
+.slogan {
+    position:relative;
+    top:50px;
+    width:100%;
+    text-align:center;
+    color:#0a5175;
+    font-weight:bold;
+    font-size:25px;
+}
+
+.singleStat {
+    float:left;
+    width:20%;
+    text-align:center;
+    color:#0a5175;
+    font-weight:bold;
+    font-size:18px;
+}
+
+.special {
+    font-weight:bold;
+    font-size:22px;
+}
 /* NEW FRONTEND */
 
 /* STYLES NICKLIST */

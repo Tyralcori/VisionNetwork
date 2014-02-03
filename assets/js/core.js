@@ -6,6 +6,13 @@ $(document).ready(function() {
         $('.channelTabs')[1].click();
         $('.channelTabs')[0].click();
     }
+    
+    // Count registerd user
+    if(typeof $('.user') != "undefined") {
+        $('.user').countTo({from: 0, to: 500});
+        $('.channel').countTo({from: 0, to: 2000});
+        $('.messages').countTo({from: 0, to: 50000});
+    }
 
     // Show messagebox on every tab excluding system tab
     $('.channelTabs').click(function() {
