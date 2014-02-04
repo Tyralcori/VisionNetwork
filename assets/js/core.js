@@ -9,7 +9,7 @@ $(document).ready(function() {
     
     // Count registerd user
     if(typeof $('.user') != "undefined") {
-        $('.user').countTo({from: 0, to: 500});
+        $('.userReg').countTo({from: 0, to: 500});
         $('.channel').countTo({from: 0, to: 2000});
         $('.messages').countTo({from: 0, to: 50000});
     }

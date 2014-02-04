@@ -9,7 +9,7 @@
                 &nbsp;
             </div>
             <div class='singleStat'>
-                <span class="user special"></span>+
+                <span class="userReg special"></span>+
                 <br/><label>Registerd user</label>
             </div>
             <div class='singleStat'>
