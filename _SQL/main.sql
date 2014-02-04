@@ -30,12 +30,13 @@ CREATE TABLE IF NOT EXISTS channels (
 PRIMARY KEY(`id`)
 );
 
--- CONNECTION TABLE 2013/11/08
+-- CONNECTION TABLE 2014/02/04
 CREATE TABLE IF NOT EXISTS connections (
 `id` int(10) AUTO_INCREMENT,
 `userID` int(5) NOT NULL,
 `channelID` int(10) NOT NULL,
 `lastActivity` datetime,
+`colorCode` varchar(45),
 PRIMARY KEY(`id`)
 );
 
