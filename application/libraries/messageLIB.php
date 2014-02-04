@@ -67,8 +67,12 @@ class messageLIB {
         // Get channel permission
         $permissionLevel = $channelLIB->getPermission($channelID, $userID);
 
+        // Get writeLevel
+        $writeLevelUnchecked = $channelLIB->getWriteLevel($channelID);
+        $writeLevel = $writeLevelUnchecked ? $writeLevelUnchecked : 0;
+
         // If permissionlevel lower than 1, return, you are maybe devoiced
-        if ($permissionLevel <= 0) {
+        if ($permissionLevel <= $writeLevel) {
             echo json_encode(array('message' => "Can not write in $channel, you are devocied."));
             die();
         }
@@ -220,6 +224,10 @@ class messageLIB {
 
 /ban CHANNELNAME USERNAME - ban a user - not allowed to join anymore
 /unban CHANNELNAME USERNAME - unbans user - allows banned user to join
+
+/setWriteLevel CHANNELNAME LEVEL - When users are allowed to write in channel? - (-1 = Nobody, 0 = everybody, 99 = hannel Owner / Moderator)
+/setJoinLevel CHANNELNAME LEVEL - When users are allowed to join channel? - (-1 = Nobody , 0 = everybody allowed)
+/allowColor CHANNELNAME LEVEL - Allows user to write with color - (-1 = No color, 0 = everybody allowed, 99 = Channel Owner / Moderator)
 </pre>');
                 break;
             case '/nextFeatures':
@@ -405,6 +413,78 @@ a.czichelski@elitecoder.eu
                 } else {
                     // Call command kick
                     $returningFunction = $commandLIB->devoice($user, $channel);
+
+                    // Return message
+                    $returnMessage = array('message' => $returningFunction);
+                }
+                break;
+            case '/allowColor':
+                // Get current colorLevel
+                if (isset($explodeLimitMessage[2])) {
+                    $level = $explodeLimitMessage[2];
+                } else {
+                    $level = 0;
+                }
+                
+                // Get channel
+                if (!empty($explodeLimitMessage[1])) {
+                    $channel = $explodeLimitMessage[1];
+                }
+
+                // If one of these are empty, return message
+                if (empty($channel)) {
+                    $returnMessage = array('message' => "Level and Channel must be given!");
+                } else {
+                    // Call command allowColor
+                    $returningFunction = $commandLIB->allowColor($channel, $level);
+
+                    // Return message
+                    $returnMessage = array('message' => $returningFunction);
+                }
+                break;
+            case '/setJoinLevel':
+                // Get current level
+                if (isset($explodeLimitMessage[2])) {
+                    $level = $explodeLimitMessage[2];
+                } else {
+                    $level = 0;
+                }
+
+                // Get channel
+                if (!empty($explodeLimitMessage[1])) {
+                    $channel = $explodeLimitMessage[1];
+                }
+
+                // If one of these are empty, return message
+                if (empty($channel)) {
+                    $returnMessage = array('message' => "Level and Channel must be given!");
+                } else {
+                    // Call command setJoinLevel
+                    $returningFunction = $commandLIB->setJoinLevel($channel, $level);
+
+                    // Return message
+                    $returnMessage = array('message' => $returningFunction);
+                }
+                break;
+            case '/setWriteLevel':
+                // Get current level
+                if (isset($explodeLimitMessage[2])) {
+                    $level = $explodeLimitMessage[2];
+                } else {
+                    $level = 0;
+                }
+
+                // Get channel
+                if (!empty($explodeLimitMessage[1])) {
+                    $channel = $explodeLimitMessage[1];
+                }
+
+                // If one of these are empty, return message
+                if (empty($channel)) {
+                    $returnMessage = array('message' => "Level and Channel must be given!");
+                } else {
+                    // Call command setWriteLevel
+                    $returningFunction = $commandLIB->setWriteLevel($channel, $level);
 
                     // Return message
                     $returnMessage = array('message' => $returningFunction);

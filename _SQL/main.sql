@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS login (
 PRIMARY KEY(id)
 );
 
--- CHANNEL TABLE 2013/11/08
+-- CHANNEL TABLE 2014/02/04
 CREATE TABLE IF NOT EXISTS channels (
 `id` int(10) AUTO_INCREMENT,
 `name` varchar(50) NOT NULL,
@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS channels (
 `slots` int(10) DEFAULT 50,
 `joinlevel` int(10) DEFAULT 0,
 `writelevel` int(10) DEFAULT 0,
+`colorlevel` int(10) DEFAULT -1,
 PRIMARY KEY(`id`)
 );
 

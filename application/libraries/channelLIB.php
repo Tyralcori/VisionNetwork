@@ -184,10 +184,49 @@ class channelLIB {
     }
 
     /**
+     * Get colorlevel for channel 
+     * @param type $channelID
+     * @return type
+     */
+    public function getColorLevel($channelID = null) {
+        // If empty channelID
+        if (empty($channelID)) {
+            return;
+        }
+        // Select colorcode
+        $selectColorCode = $this->ci->db->query("SELECT `colorlevel` FROM channels WHERE channelID = {$channelID}")->row()->colorlevel;
+
+        // And return color code
+        return $selectColorCode;
+    }
+
+    /**
+     * Sets colorCode for channel
+     * @param type $channelID
+     * @param type $colorLevel
+     * @return boolean
+     */
+    public function setColorLevel($channelID = null, $colorLevel = null) {
+        // If empty channelID || $colorLevel
+        if (empty($channelID)) {
+            return;
+        }
+        
+        // Just safe one
+        $colorLevel = (int) $colorLevel;
+        
+        // Set color code
+        $setColorLevelQuery = $this->ci->db->query("UPDATE channels SET colorlevel = '{$colorLevel}' WHERE id = {$channelID}");
+        
+        // Always true?
+        return true;
+    }
+
+    /**
      * Get colorCode for channel by user
      * @param type $channelID
      * @param type $userID
-     * @return int
+     * @return type
      */
     public function getColorInChannel($channelID = null, $userID = null) {
         // If empty channelID || $userID return
@@ -195,7 +234,7 @@ class channelLIB {
             return;
         }
         // Select colorcode
-        $selectColorCode = $this->ci->db->query("SELECT `colorCode` FROM connections WHERE userID = {$userID} AND channelID = {$channelID}")->row()->permissionLevel;
+        $selectColorCode = $this->ci->db->query("SELECT `colorCode` FROM connections WHERE userID = {$userID} AND channelID = {$channelID}")->row()->colorCode;
 
         // And return color code
         return $selectColorCode;
@@ -205,8 +244,8 @@ class channelLIB {
      * Sets colorCode for a user in a channel
      * @param type $channelID
      * @param type $userID
-     * @param int $permission
-     * @return type
+     * @param type $colorCode
+     * @return boolean
      */
     public function setColorInChannel($channelID = null, $userID = null, $colorCode = null) {
         // If empty channelID || $userID || $colorCode return
@@ -295,6 +334,22 @@ class channelLIB {
         // Return slots
         return $limitConnectionsByChannel;
     }
+    
+    /**
+     * Set allowed slots
+     * @param type $channelID
+     * @return type
+     */
+    public function setSlots($channelID = null, $slots = null) {
+        // If empty channelID, return
+        if (empty($channelID)) {
+            return;
+        }
+        // Set slot by channel id
+        $setSlots = $this->ci->db->query("UPDATE channels SET slots = {$slots} WHERE id = {$channelID}");
+        // Return slots
+        return $setSlots;
+    }
 
     /**
      * Returns join level 
@@ -311,6 +366,24 @@ class channelLIB {
         // Return join level
         return $limitJoinLevelByChannel;
     }
+    
+    /**
+     * Set join level 
+     * @param type $channelID
+     * @param type $writeLevel
+     * @return type
+     */
+    public function setJoinLevel($channelID = null, $joinLevel = null) {
+        // If empty channelID, return
+        if (empty($channelID)) {
+            return;
+        }        
+        // Update joinLevel
+        $updateWriteLevel = $this->ci->db->query("UPDATE channels SET joinlevel = {$joinLevel} WHERE id LIKE {$channelID}");
+        
+        // Always true?
+        return $updateWriteLevel;
+    }
 
     /**
      * Returns write level 
@@ -326,6 +399,24 @@ class channelLIB {
         $limitWriteLevelByChannel = $this->ci->db->query("SELECT `writelevel` FROM channels WHERE id LIKE {$channelID}")->row()->writelevel;
         // Return join level
         return $limitWriteLevelByChannel;
+    }
+    
+    /**
+     * Set write level 
+     * @param type $channelID
+     * @param type $writeLevel
+     * @return type
+     */
+    public function setWriteLevel($channelID = null, $writeLevel = null) {
+        // If empty channelID, return
+        if (empty($channelID)) {
+            return;
+        }
+        // Update writeLevel
+        $updateWriteLevel = $this->ci->db->query("UPDATE channels SET writelevel = {$writeLevel} WHERE id LIKE {$channelID}");
+        
+        // Always true?
+        return $updateWriteLevel;
     }
 
     /**

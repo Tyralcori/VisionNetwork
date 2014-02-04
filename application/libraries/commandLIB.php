@@ -215,7 +215,7 @@ class commandLIB {
         // Return message
         return $message;
     }
-    
+
     /**
      * Devoice a user by name 
      * @param type $username
@@ -285,7 +285,7 @@ class commandLIB {
         // Return message
         return $message;
     }
-    
+
     /**
      * Ban user
      * @param type $username
@@ -356,7 +356,7 @@ class commandLIB {
         // Return message
         return $message;
     }
-    
+
     /**
      * Set a colorcode in channel
      * @param type $channel
@@ -368,24 +368,171 @@ class commandLIB {
         if (empty($channel) || empty($colorCode)) {
             return false;
         }
-        
+
         // Get userID from session (user)
         $session = $this->ci->session->all_userdata();
         $userID = $session['id'];
-        
+
         // Channel LIB
         require_once APPPATH . 'libraries/channelLIB.php';
-        $channelLIB = new channelLIB();    
-        
+        $channelLIB = new channelLIB();
+
         // Get channelID by Name
         $channelID = $channelLIB->getChannelIDByName($channel);
-        
+
         // Set color
         $colorSet = $channelLIB->setColorInChannel($channelID, $userID, $colorCode);
-        
+
         // Return functions return
         return $colorSet;
     }
+
+    /**
+     * Set ColorLevel
+     * @param type $channel
+     * @param type $colorLevel
+     * @return boolean
+     */
+    public function allowColor($channel = null, $colorLevel = null) {
+        // If one of these are empty, return false
+        if (empty($channel)) {
+            return false;
+        }
+
+        $colorLevel = (int) $colorLevel;
+        
+        // Channel LIB
+        require_once APPPATH . 'libraries/channelLIB.php';
+        $channelLIB = new channelLIB();
+
+        // Get userID from session (user)
+        $session = $this->ci->session->all_userdata();
+        $userID = $session['id'];
+        // Global permission
+        $globalPermission = $session['globalPermission'];
+
+        // Must not be empty userid
+        if (empty($userID)) {
+            return "Invalid permission";
+        }
+
+        // Get channelID by Name
+        $channelID = $channelLIB->getChannelIDByName($channel);
+
+        // Get permissionLevel by channelID, userID
+        $permissionLevel = $channelLIB->getPermission($channelID, $userID);
+
+        // Default message
+        $message = "Invalid permission";
+
+        // Check permission
+        if ($permissionLevel >= 99 || $globalPermission >= 99) {
+            // Set color
+            $colorLevel = $channelLIB->setColorLevel($channelID, $colorLevel);
+            $message = "Colorlevel updated.";
+
+        }
+        // Return functions return
+        return $message;
+    }
+    
+    /**
+     * Set WriteLevel
+     * @param type $channel
+     * @param type $level
+     * @return boolean
+     */
+    public function setWriteLevel($channel = null, $level = null) {
+        // If one of these are empty, return false
+        if (empty($channel)) {
+            return false;
+        }
+        
+        $level = (int) $level;
+
+        // Channel LIB
+        require_once APPPATH . 'libraries/channelLIB.php';
+        $channelLIB = new channelLIB();
+
+        // Get userID from session (user)
+        $session = $this->ci->session->all_userdata();
+        $userID = $session['id'];
+        // Global permission
+        $globalPermission = $session['globalPermission'];
+
+        // Must not be empty userid
+        if (empty($userID)) {
+            return "Invalid permission";
+        }
+
+        // Get channelID by Name
+        $channelID = $channelLIB->getChannelIDByName($channel);
+
+        // Get permissionLevel by channelID, userID
+        $permissionLevel = $channelLIB->getPermission($channelID, $userID);
+
+        // Default message
+        $message = "Invalid permission";
+
+        // Check permission
+        if ($permissionLevel >= 99 || $globalPermission >= 99) {
+            // Set color
+            $level = $channelLIB->setWriteLevel($channelID, $level);            
+            $message = "WriteLevel updated.";
+        }
+        // Return functions return
+        return $message;
+    }
+    
+    /**
+     * Set JoinLevel
+     * @param type $channel
+     * @param type $level
+     * @return boolean
+     */
+    public function setJoinLevel($channel = null, $level = null) {
+        // If one of these are empty, return false
+        if (empty($channel)) {
+            return false;
+        }
+        
+        $level = (int) $level;
+
+        // Channel LIB
+        require_once APPPATH . 'libraries/channelLIB.php';
+        $channelLIB = new channelLIB();
+
+        // Get userID from session (user)
+        $session = $this->ci->session->all_userdata();
+        $userID = $session['id'];
+        // Global permission
+        $globalPermission = $session['globalPermission'];
+
+        // Must not be empty userid
+        if (empty($userID)) {
+            return "Invalid permission";
+        }
+
+        // Get channelID by Name
+        $channelID = $channelLIB->getChannelIDByName($channel);
+
+        // Get permissionLevel by channelID, userID
+        $permissionLevel = $channelLIB->getPermission($channelID, $userID);
+
+        // Default message
+        $message = "Invalid permission";
+
+        // Check permission
+        if ($permissionLevel >= 99 || $globalPermission >= 99) {
+            // Set color
+            $level = $channelLIB->setJoinLevel($channelID, $level);
+            $message = "JoinLevel updated.";
+
+        }
+        // Return functions return
+        return $message;
+    }
+
 }
 
 ?>
