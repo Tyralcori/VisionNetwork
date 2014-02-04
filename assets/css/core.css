@@ -331,10 +331,13 @@
 
 .slogan {
     position:relative;
-    top:50px;
+    top:30px;
     width:100%;
     text-align:center;
-    color:#0a5175;
+}
+
+.slogan a {
+    color:#333;
     font-weight:bold;
     font-size:25px;
 }
@@ -343,7 +346,7 @@
     float:left;
     width:20%;
     text-align:center;
-    color:#0a5175;
+    color:#333;
     font-weight:bold;
     font-size:18px;
 }
