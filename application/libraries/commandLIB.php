@@ -429,8 +429,11 @@ class commandLIB {
         if ($permissionLevel >= 99 || $globalPermission >= 99) {
             // Set color
             $colorLevel = $channelLIB->setColorLevel($channelID, $colorLevel);
-            $message = "Colorlevel updated.";
-
+            
+            if($colorLevel == true) {
+                // Set message
+                $message = "Colorlevel updated.";
+            }
         }
         // Return functions return
         return $message;
@@ -477,8 +480,12 @@ class commandLIB {
         // Check permission
         if ($permissionLevel >= 99 || $globalPermission >= 99) {
             // Set color
-            $level = $channelLIB->setWriteLevel($channelID, $level);            
-            $message = "WriteLevel updated.";
+            $level = $channelLIB->setWriteLevel($channelID, $level);
+            
+            if($level == true) {
+                // Set message
+                $message = "WriteLevel updated.";
+            }
         }
         // Return functions return
         return $message;
@@ -526,8 +533,11 @@ class commandLIB {
         if ($permissionLevel >= 99 || $globalPermission >= 99) {
             // Set color
             $level = $channelLIB->setJoinLevel($channelID, $level);
-            $message = "JoinLevel updated.";
-
+            
+            if($level == true) {
+                // Set message
+                $message = "JoinLevel updated.";
+            }
         }
         // Return functions return
         return $message;
