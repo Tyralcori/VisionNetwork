@@ -190,7 +190,7 @@ class commandLIB {
         // Check permission
         if ($permissionLevel >= 99 || $globalPermission >= 99) {
 
-            // Channel LIB
+            // User LIB
             require_once APPPATH . 'libraries/userLIB.php';
             $userLIB = new userLIB();
 
@@ -260,7 +260,7 @@ class commandLIB {
         // Check permission
         if ($permissionLevel >= 99 || $globalPermission >= 99) {
 
-            // Channel LIB
+            // User LIB
             require_once APPPATH . 'libraries/userLIB.php';
             $userLIB = new userLIB();
 
@@ -330,7 +330,7 @@ class commandLIB {
         // Check permission
         if ($permissionLevel >= 99 || $globalPermission >= 99) {
 
-            // Channel LIB
+            // User LIB
             require_once APPPATH . 'libraries/userLIB.php';
             $userLIB = new userLIB();
 
@@ -355,6 +355,36 @@ class commandLIB {
 
         // Return message
         return $message;
+    }
+    
+    /**
+     * Set a colorcode in channel
+     * @param type $channel
+     * @param type $colorCode
+     * @return boolean
+     */
+    public function setColor($channel = null, $colorCode = null) {
+        // If one of these are empty, return false
+        if (empty($channel) || empty($colorCode)) {
+            return false;
+        }
+        
+        // Get userID from session (user)
+        $session = $this->ci->session->all_userdata();
+        $userID = $session['id'];
+        
+        // Channel LIB
+        require_once APPPATH . 'libraries/channelLIB.php';
+        $channelLIB = new channelLIB();    
+        
+        // Get channelID by Name
+        $channelID = $channelLIB->getChannelIDByName($channel);
+        
+        // Set color
+        $colorSet = $channelLIB->setColorInChannel($channelID, $userID, $colorCode);
+        
+        // Return functions return
+        return $colorSet;
     }
 }
 

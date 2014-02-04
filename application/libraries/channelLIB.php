@@ -86,15 +86,15 @@ class channelLIB {
         // Check already connected
         $connected = $this->checkConnection($getChannelIDQuery, $userID);
         if ($connected) {
-            
+
             // Check, if user is banned
             $permission = $this->getPermission($getChannelIDQuery, $userID);
-            
+
             // Banned
-            if($permission == "-1") {
+            if ($permission == "-1") {
                 return "Can not join channel $channelName. You are banned!";
             }
-            
+
             $channelInfos = $this->getChannelInformations($getChannelIDQuery);
             return $channelInfos;
         }
@@ -184,6 +184,51 @@ class channelLIB {
     }
 
     /**
+     * Get colorCode for channel by user
+     * @param type $channelID
+     * @param type $userID
+     * @return int
+     */
+    public function getColorInChannel($channelID = null, $userID = null) {
+        // If empty channelID || $userID return
+        if (empty($channelID) || empty($userID)) {
+            return;
+        }
+        // Select colorcode
+        $selectColorCode = $this->ci->db->query("SELECT `colorCode` FROM connections WHERE userID = {$userID} AND channelID = {$channelID}")->row()->permissionLevel;
+
+        // And return color code
+        return $selectColorCode;
+    }
+
+    /**
+     * Sets colorCode for a user in a channel
+     * @param type $channelID
+     * @param type $userID
+     * @param int $permission
+     * @return type
+     */
+    public function setColorInChannel($channelID = null, $userID = null, $colorCode = null) {
+        // If empty channelID || $userID || $colorCode return
+        if (empty($channelID) || empty($userID) || empty($colorCode)) {
+            return;
+        }
+
+        // Check, if exists
+        $checkConnection = $this->ci->db->query("SELECT * FROM connections WHERE userID = {$userID} AND channelID = {$channelID}");
+
+        // If exits update, else insert
+        if ($checkConnection->num_rows() > 0) {
+            // Set color code
+            $setColorCodeQuery = $this->ci->db->query("UPDATE connections SET colorCode = '{$colorCode}' WHERE  userID = {$userID} AND channelID = {$channelID}");
+            return true;
+        }
+
+        // Return false if not connected
+        return false;
+    }
+
+    /**
      * Get Permission for channel by user
      * @param type $channelID
      * @param type $userID
@@ -220,17 +265,17 @@ class channelLIB {
         if (empty($permission) && $permission != "0") {
             $permission = 1;
         }
-        
+
         // Check, if exists
         $selectPermission = $this->ci->db->query("SELECT * FROM permissions WHERE userID = {$userID} AND channelID = {$channelID}");
-        
+
         // If exits update, else insert
-        if($selectPermission->num_rows() > 0) {
+        if ($selectPermission->num_rows() > 0) {
             $updatePermissionQuery = $this->ci->db->query("UPDATE permissions SET permissionLevel = {$permission} WHERE  userID = {$userID} AND channelID = {$channelID}");
-        } else {        
+        } else {
             $insertPermissionQuery = $this->ci->db->query("INSERT INTO `permissions` (userID, channelID, permissionLevel) VALUES ({$userID},{$channelID},{$permission})");
         }
-        
+
         // Think, always success
         return true;
     }
@@ -380,7 +425,7 @@ class channelLIB {
         }
         // Check if connection exists
         $selectConnection = $this->ci->db->query("SELECT * FROM connections WHERE userID = {$userID} AND channelID = {$channelID}");
-        
+
         if ($selectConnection->num_rows() > 0) {
             // Kill connection
             $killedConnection = $this->ci->db->query("DELETE FROM connections WHERE userID = {$userID} AND channelID = {$channelID}");

@@ -208,7 +208,8 @@ class messageLIB {
 <h4>HELP:</h4>
 <label>[Channel commands]</label>
 /join CHANNELNAME - join a channel
-/leave CHANNELNAME - leave a channel (You can type /leave for leaving current channel)
+/leave CHANNELNAME - leave a channel
+/setColor CHANNELNAME (HEXCODE or COLORNAME) - sets color for all your messages in current channel
 /nextFeatures - list next version features
 
 <label>[Moderator commands]</label>
@@ -245,6 +246,9 @@ a.czichelski@elitecoder.eu
 </pre>');
                 break;
             case '/leave':
+                // Set default channel
+                $channel = "default";
+                
                 // Overwrite current channel, if given
                 if (!empty($explodeLimitMessage[1])) {
                     $channel = $explodeLimitMessage[1];
@@ -286,6 +290,32 @@ a.czichelski@elitecoder.eu
                 $returnMessage = array('message' => $returningFunctionMessage);
                 break;
             case '/ignore':
+                break;
+            case '/setColor':
+                // Set default channel
+                $channel = "default";
+                
+                // Overwrite current channel, if given
+                if (!empty($explodeLimitMessage[1])) {
+                    $channel = $explodeLimitMessage[1];
+                }
+                
+                $colorCode = "";
+                // Current colorCode
+                if (!empty($explodeLimitMessage[2])) {
+                    $colorCode = $explodeLimitMessage[2];
+                }
+                
+                // Call setColor
+                $returningFunction = $commandLIB->setColor($channel, $colorCode);
+
+                // Create returning message
+                $returningFunctionMessage = "Can't set color $colorCode in $channel. Are you in this channel?";
+                if ($returningFunction == true) {
+                    $returningFunctionMessage = "Color $colorCode is now in use for channel $channel";
+                }
+                // Return message
+                $returnMessage = array('message' => $returningFunctionMessage);
                 break;
             // =========================== PRIVATE COMMANDS END =========================== //
             
