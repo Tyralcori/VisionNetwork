@@ -6,6 +6,7 @@
                 <hr>
             </div>
         </div>
+        <br/>
         <div class="row">
             <div class="col-md-2 col-md-offset-2 text-center">
                 <div class="service-item">
@@ -18,6 +19,7 @@
                     </div>
                 </div>
             </div>
+            <br/>
             <div class="col-md-2 text-center">
                 <div class="service-item">
                     <h4>Channel handling</h4>
@@ -29,6 +31,7 @@
                     </div>
                 </div>
             </div>
+            <br/>
             <div class="col-md-2 text-center">
                 <div class="service-item">
                     <h4>System</h4>
@@ -40,6 +43,7 @@
                     </div>
                 </div>
             </div>
+            <br/>
             <div class="col-md-2 text-center">
                 <div class="service-item">
                     <h4>BOTS</h4>
@@ -51,6 +55,7 @@
                     </div>
                 </div>
             </div>
+            <br/>
             <div class="col-md-2 text-center">
                 <div class="service-item">
                     <h4>Backend</h4>
@@ -58,6 +63,30 @@
                     <div class="progress">
                         <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
                             <span class="sr-only">40% Complete</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="col-md-2 text-center">
+                <div class="service-item">
+                    <h4>Google Web Fonts [NEW]</h4>
+                    <p>Your channel font is boring? Include your own font by google web fonts!</p>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                            <span class="sr-only">0% Complete</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="col-md-2 text-center">
+                <div class="service-item">
+                    <h4>The day we fighr back Integration [NEW] - Included in experimental version for now!</h4>
+                    <p>You and all your visitors want to fight back against NSA? Now with "thedaywefightback" JavaScript lib! Safe the date 2014/02/11 - The banner is active for 26 hours (you can turn it on/off in the config)</p>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                            <span class="sr-only">100% Complete</span>
                         </div>
                     </div>
                 </div>
