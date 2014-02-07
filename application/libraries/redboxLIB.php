@@ -210,6 +210,7 @@ class redboxLIB {
     }
 
     // ================================== SEO PROFILING ================================== //
+    // 
     // ================================== SERVER PROFILING ================================== //
     /**
      * Get stats from server / host
@@ -339,7 +340,7 @@ class redboxLIB {
         $cores = $getCores[0];
 
         // Get loadAVG
-        exec('/bin/cat /proc/loadavg | /usr/bin/awk \'{print $1","$2","$3}\'', $getAVG);
+        exec('/bin/cat /proc/loadavg | /usr/bin/awk \'{print $1","$2","$3","$4}\'', $getAVG);
         $loadAvg = explode(',', $getAVG[0]);
 
         // Get avg by core

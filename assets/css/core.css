@@ -435,3 +435,18 @@
     cursor:pointer;
 }
 /* BOTTOM BAR */
+
+/* BACKEND */
+
+.leftMenu {
+    width:75%;
+}
+
+.rightMenu {
+    width:25%;
+    position:fixed;
+    top:50px;
+    right:0px;
+}
+
+/* BACKEND */

@@ -1,69 +1,23 @@
-<!-- Side Menu -->
-{include "REDBOX/ELEMENTS/sidebar.php"}
-<!-- Side Menu END -->
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+    <li><a href="#seo" data-toggle="tab">SEO</a></li>
+    <li><a href="#tech" data-toggle="tab">TECH</a></li>
+</ul>
 
-<!-- FOOT SCRIPT -->
-<script type="text/javascript" src="http://{$assetsURL}/js/Chart.min.js"></script>
-<script>
-    $("#menu-close").click(function(e) {
-        e.preventDefault();
-        $("#sidebar-wrapper").toggleClass("active");
-    });
-</script>
-<script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#sidebar-wrapper").toggleClass("active");
-    });
-</script>
-<script>
-    $(function() {
-        // Whyever this fix the bug..
-        window.scrollTo(0,0);
-        
-        // Scroll allow
-        $('a[href*=#]:not([href=#])').click(function() {
-            if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '')
-                    || location.hostname == this.hostname) {
-
-                var target = $(this.hash);
-                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-                if (target.length) {
-                    $('html,body').animate({
-                        scrollTop: target.offset().top
-                    }, 1000);
-                    return false;
-                }
-            }
-        });
-    });
-</script>
-<!-- FOOT SCRIPT END -->
-
-<!-- DASH Menu -->
-{include "REDBOX/ELEMENTS/dashboard.php"}
-<!-- DASH Menu END -->
-
-<!-- Views -->
-{include "REDBOX/ELEMENTS/views.php"}
-<!-- Views -->
-
-<!-- Visitors -->
-{include "REDBOX/ELEMENTS/visitors.php"}
-<!-- Visitors -->
-
-<!-- Tickets / Bugs -->
-{include "REDBOX/ELEMENTS/tracker.php"}
-<!-- Tickets / Bugs -->
-
-<!-- Useragent -->
-{include "REDBOX/ELEMENTS/useragent.php"}
-<!-- Useragent -->
-
-<!-- Logs -->
-{include "REDBOX/ELEMENTS/logs.php"}
-<!-- Logs -->
-
-<!-- Soon -->
-{include "REDBOX/ELEMENTS/soon.php"}
-<!-- Soon -->
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="home">
+        <!-- HOME -->
+        {include "REDBOX/ELEMENTS/backendOpener.php"}
+        <!-- HOME END -->
+    </div>
+    <div class="tab-pane fade" id="seo">
+        <!-- SEO -->
+        {include "REDBOX/ELEMENTS/seoPart.php"}
+        <!-- SEO END -->
+    </div>
+    <div class="tab-pane fade" id="tech">
+        <!-- TECH -->
+        {include "REDBOX/ELEMENTS/techPart.php"}
+        <!-- TECH END -->
+    </div>
+</div>
