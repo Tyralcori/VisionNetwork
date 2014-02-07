@@ -18,14 +18,14 @@
                             strokeColor: "rgba(220,220,220,1)",
                             pointColor: "rgba(220,220,220,1)",
                             pointStrokeColor: "#fff",
-                            data: [{$redbox.timeLoad.week.LOWEST.0.timeLoad}, {$redbox.timeLoad.week.AVG.0.timeLoad}, {$redbox.timeLoad.week.HIGHEST.0.timeLoad}]
+                            data: [{$redbox.seo.timeLoad.week.LOWEST.0.timeLoad}, {$redbox.seo.timeLoad.week.AVG.0.timeLoad}, {$redbox.seo.timeLoad.week.HIGHEST.0.timeLoad}]
                     },
                     {
                     fillColor: "rgba(151,187,205,0.5)",
                             strokeColor: "rgba(151,187,205,1)",
                             pointColor: "rgba(151,187,205,1)",
                             pointStrokeColor: "red",
-                            data: [{$redbox.timeLoad.all.LOWEST.0.timeLoad}, {$redbox.timeLoad.all.AVG.0.timeLoad}, {$redbox.timeLoad.all.HIGHEST.0.timeLoad}]
+                            data: [{$redbox.seo.timeLoad.all.LOWEST.0.timeLoad}, {$redbox.seo.timeLoad.all.AVG.0.timeLoad}, {$redbox.seo.timeLoad.all.HIGHEST.0.timeLoad}]
                     }
                 ]
         };
