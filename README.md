@@ -34,6 +34,10 @@ Channelsettings (How many slots allowed, Link posting, etc. for channel owner)
 ### Redbox
 API for import & export stats?
 
+### Server Monitoring (it's done!)
+Mointor your server, based on exec statements in redbox backend!
+You missing some stats? Mail me!
+
 ### Bots
 Channelbots for creating games (Quizbot, e.g.)
 

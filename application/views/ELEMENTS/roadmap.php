@@ -59,10 +59,10 @@
             <div class="col-md-2 text-center">
                 <div class="service-item">
                     <h4>Backend</h4>
-                    <p>Create a backend for handle ticket requests, redbox, traffic overview, stats.</p>
+                    <p>Create a backend for handle ticket requests, redbox, traffic overview, system server overview, stats.</p>
                     <div class="progress">
-                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;">
-                            <span class="sr-only">40% Complete</span>
+                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
+                            <span class="sr-only">80% Complete</span>
                         </div>
                     </div>
                 </div>
