@@ -120,7 +120,11 @@ $(document).ready(function() {
 
                     // Create new log foreach message
                     $.each(messages, function(messageNum, messageArr) {
-                        $(currentChatTab).append("[" + messageArr.timestamp + "]  <a  data-toggle='modal' data-target='#setcard' class='user chatUser level" + messageArr.level + "'>" + messageArr.username + "</a>: " + messageArr.message + "<br/>");
+                        if(messageArr.colorCode) {
+                            $(currentChatTab).append("[" + messageArr.timestamp + "]  <a  data-toggle='modal' data-target='#setcard' class='user chatUser level" + messageArr.level + "'>" + messageArr.username + "</a>: <span style='color:" + messageArr.colorCode + "'>" + messageArr.message + "</span><br/>");
+                        } else {
+                            $(currentChatTab).append("[" + messageArr.timestamp + "]  <a  data-toggle='modal' data-target='#setcard' class='user chatUser level" + messageArr.level + "'>" + messageArr.username + "</a>: " + messageArr.message + "<br/>");
+                        }
                     });
                     
                     // Scroll bottom 

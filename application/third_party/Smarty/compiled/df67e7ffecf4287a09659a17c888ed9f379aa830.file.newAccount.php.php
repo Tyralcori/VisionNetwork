@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.13, created on 2014-01-16 10:33:31
+<?php /* Smarty version Smarty-3.1.13, created on 2014-02-07 18:43:36
          compiled from "application/views/ELEMENTS/newAccount.php" */ ?>
 <?php /*%%SmartyHeaderCode:9907119852d7a76ba779b2-50145540%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'df67e7ffecf4287a09659a17c888ed9f379aa830' => 
     array (
       0 => 'application/views/ELEMENTS/newAccount.php',
-      1 => 1388753650,
+      1 => 1389727512,
       2 => 'file',
     ),
   ),
@@ -15,6 +15,8 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   'function' => 
   array (
   ),
+  'version' => 'Smarty-3.1.13',
+  'unifunc' => 'content_52d7a76bb23871_33908918',
   'variables' => 
   array (
     'user' => 0,
@@ -22,8 +24,6 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'message' => 0,
   ),
   'has_nocache_code' => false,
-  'version' => 'Smarty-3.1.13',
-  'unifunc' => 'content_52d7a76bb23871_33908918',
 ),false); /*/%%SmartyHeaderCode%%*/?>
 <?php if ($_valid && !is_callable('content_52d7a76bb23871_33908918')) {function content_52d7a76bb23871_33908918($_smarty_tpl) {?><div id="newAccount">
     <div class="container">

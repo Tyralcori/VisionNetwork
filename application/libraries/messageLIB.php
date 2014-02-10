@@ -159,7 +159,10 @@ class messageLIB {
         // Foreach channel
         foreach ($channelIDs as $channelID => $channelName) {
             // Get messgaes
-            $messageQuery = $this->ci->db->query("SELECT m.*, l.username, l.globalPermission as level FROM messages as m, login as l WHERE m.channelID LIKE '{$channelID}' AND m.userID = l.id ORDER BY timestamp ASC");
+            $messageQuery = $this->ci->db->query(
+                    "SELECT c.colorCode, m.*, l.username, l.globalPermission as level "
+                    . "FROM messages as m, login as l, connections as c "
+                    . "WHERE m.channelID LIKE '{$channelID}' AND c.userID = m.userID AND c.channelID = '{$channelID}' AND m.userID = l.id ORDER BY timestamp ASC");
 
             // Add some nice messages!
             foreach ($messageQuery->result() as $key => $value) {
