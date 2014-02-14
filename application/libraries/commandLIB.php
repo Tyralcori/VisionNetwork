@@ -386,6 +386,22 @@ class commandLIB {
         // Return functions return
         return $colorSet;
     }
+    
+    /**
+     * Return all channels
+     * @return type
+     */
+    public function getAllChannels() {
+        // Channel LIB
+        require_once APPPATH . 'libraries/channelLIB.php';
+        $channelLIB = new channelLIB();
+        
+        // Get all channels
+        $channelList = $channelLIB->listAllChannels();
+        
+        // Return all channels
+        return $channelList;
+    }
 
     /**
      * Set ColorLevel

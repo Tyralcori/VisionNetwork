@@ -218,6 +218,7 @@ class messageLIB {
 /leave CHANNELNAME - leave a channel
 /setColor CHANNELNAME (HEXCODE or COLORNAME) - sets color for all your messages in current channel
 /nextFeatures - list next version features
+/listChannels - list all channels
 
 <label>[Moderator commands]</label>
 /kick CHANNELNAME USERNAME - kicks user out of channel
@@ -327,6 +328,26 @@ a.czichelski@elitecoder.eu
                 }
                 // Return message
                 $returnMessage = array('message' => $returningFunctionMessage);
+                break;
+            case '/listChannels':
+                // Get all channels
+                $channels = $commandLIB->getAllChannels();
+                
+                // Current channels
+                $countChannels = count($channels);
+                
+                // Message container
+                $messageContainer = "<br/><pre>$countChannels channels found. Use /join CHANNELNAME to join. List:";
+                
+                // Foreach channel
+                foreach($channels as $key => $channel) {
+                    $messageContainer .= "<br/>" . $channel;
+                }
+                
+                $messageContainer .= "</pre>";
+                
+                // Return message
+                $returnMessage = array('message' => $messageContainer);
                 break;
             // =========================== PRIVATE COMMANDS END =========================== //
             
