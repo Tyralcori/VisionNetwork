@@ -698,7 +698,7 @@ class channelLIB {
      */
     public function listAllChannels () {
         // Get all channels
-        $selectAllChannels = $this->ci->db->query("SELECT DISTINCT name FROM vision.channels");
+        $selectAllChannels = $this->ci->db->query("SELECT DISTINCT name FROM channels");
         
         // Channel container
         $channelContainer = array();
