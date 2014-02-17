@@ -212,14 +212,15 @@ class messageLIB {
             case '/help':
                 $returnMessage = array('message' => '
 <pre>
-<h4>HELP:</h4>
 <label>[Channel commands]</label>
 /join CHANNELNAME - join a channel
 /leave CHANNELNAME - leave a channel
 /setColor CHANNELNAME (HEXCODE or COLORNAME) - sets color for all your messages in current channel
 /nextFeatures - list next version features
 /listChannels - list all channels
+</pre>
 
+<pre>
 <label>[Moderator commands]</label>
 /kick CHANNELNAME USERNAME - kicks user out of channel
 
@@ -233,6 +234,22 @@ class messageLIB {
 /setJoinLevel CHANNELNAME LEVEL - When users are allowed to join channel? - (-1 = Nobody , 0 = everybody allowed)
 /allowColor CHANNELNAME LEVEL - Allows user to write with color - (-1 = No color, 0 = everybody allowed, 99 = Channel Owner / Moderator)
 </pre>');
+                // Get usersession data
+                $session = $this->ci->session->all_userdata();
+                // Check global permission
+                $level = $session['globalPermission'];
+                // If global operator
+                if($level >= 99) {
+                    $returnMessage['message'] .= '
+<pre>
+<label>[Global operator commands]</label>
+/truncateChannel CHANNELNAME - truncate log of a channel
+/delteChannel CHANNELNAME - delete a channel
+/banGlobal USERNAME UNTIL (optional) MESSAGE (optional) - bans user (VISION NETWORK BAN!)
+/unbanGlobal USERNAME - unbans user (VISION NETWORK BAN!)
+</pre>';
+                }
+                
                 break;
             case '/nextFeatures':
                 $returnMessage = array('message' => '
