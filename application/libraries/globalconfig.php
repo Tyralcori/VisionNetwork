@@ -26,6 +26,7 @@ class globalconfig {
                 'template' => 'default',
                 'allowPrivateDebug' => true,
                 'version' => '0.5.2',
+                'profiling' => true,
             ),
             'profilePictures' => array(
                 'profilePicturesPATH' => $_SERVER['DOCUMENT_ROOT'] . '/profilePic', 
