@@ -144,15 +144,16 @@ class launcher extends CI_Controller {
             $subexecuter = $subpage;
         }
 
-        // Load and execute libs | functions
-        if (!empty($executer) && file_exists(APPPATH . 'libraries/' . $executer . '.php')) {
-            require_once APPPATH . 'libraries/' . $executer . '.php';
-            $siteAction = new $executer;
-            if (!empty($subexecuter) && method_exists($siteAction, $subexecuter)) {
-                $output = $siteAction->$subexecuter();
-            } elseif (method_exists($siteAction, 'index')) {
-                $output = $siteAction->index();
-            }
+        // Check factory pattern
+        if(file_exists(APPPATH . 'libraries/factory.php')) {
+            // Get factory pattern
+            require_once APPPATH . 'libraries/factory.php';
+        
+            // Create factory
+            $factory = new factory($executer, $subexecuter);
+             
+           // Get output
+            $output = $factory->getOutput();
 
             // When we have an return, put it into output
             if (!empty($output)) {
@@ -160,8 +161,7 @@ class launcher extends CI_Controller {
                     $options[str_replace('LIB', '', $executer)][$subexecuter] = $output;
                 } else {
                     $options[str_replace('LIB', '', $executer)] = $output;
-                }
-                
+                }                
             }
         }
 
