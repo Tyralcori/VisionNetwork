@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Profiler class (yes, this is a singleton)
+ * @author Alexander Czichelski <a.czichelski@elitecoder.eu> | NO PRIVATE SUPPORT
+ * @version "soon"
+ * @todo Nothing to do here
+ */
 class profiler {
 
     /**
